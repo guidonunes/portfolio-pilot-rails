@@ -22,6 +22,12 @@ class WalletsController < ApplicationController
     end
   end
 
+  def destroy
+    @wallet = Wallet.find(params[:id])
+    @wallet.destroy!
+    redirect_to wallets_path
+  end
+
   private
 
   def wallet_params
