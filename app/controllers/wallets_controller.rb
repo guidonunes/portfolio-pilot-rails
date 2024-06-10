@@ -25,6 +25,6 @@ class WalletsController < ApplicationController
   private
 
   def wallet_params
-    params.require(:wallet).permit(:name, :user_id)
+    params.require(:wallet).permit(:name)
   end
 end
