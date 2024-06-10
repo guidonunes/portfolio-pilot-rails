@@ -22,6 +22,18 @@ class WalletsController < ApplicationController
     end
   end
 
+  def edit
+    @wallet = Wallet.find(params[:id])
+  end
+
+  def update
+    if @wallet.update(wallet_params)
+      redirect_to @wallet, notice: 'Wallet has been successfully updated.', status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @wallet = Wallet.find(params[:id])
     @wallet.destroy!
