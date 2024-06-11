@@ -1,16 +1,22 @@
 class OperationsController < ApplicationController
   before_action :set_operation, only: [:destroy]
   def new
+    @wallet = Wallet.find(params[:wallet_id])
     @operation = Operation.new
+    @operation.wallet = @wallet
+    authorize @operation
   end
 
   def create
+    @wallet = Wallet.find(params[:wallet_id])
     @operation = Operation.new(operation_params)
     @operation.wallet = @wallet
+    authorize @operation
     if @operation.save
-      redirect_to wallet_path(@wallet), notice: "Operation was successfully created."
+      redirect_to wallet_path(@wallet)
     else
-      render :new, status: :unprocessable_entity
+      render :new
+      @operation = Operation.new
     end
   end
 
@@ -21,11 +27,7 @@ class OperationsController < ApplicationController
 
   private
 
-  def set_operation
-    @operation = Operation.find(params[:id])
-  end
-
   def operation_params
-    params.require(:operation).permit(:quantity, :initial_price) # Permit specific attributes
+    params.require(:operation).permit(:holding_id, :quantity, :initial_price)
   end
 end
