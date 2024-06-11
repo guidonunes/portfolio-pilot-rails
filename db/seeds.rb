@@ -9,7 +9,7 @@
 #   end
 
 User.destroy_all
-Asset.destroy_all
+Holding.destroy_all
 Wallet.destroy_all
 Stock.destroy_all
 
@@ -19,10 +19,10 @@ user_2 = User.create(first_name: "Vitalik", last_name: "Buterin", email: "vitali
 puts "user created"
 
 puts "creating assets..."
-asset_1 = Asset.create(name: "Bitcoin", price: 65.75)
-asset_2 = Asset.create(name: "Petrobras", price: 32.50)
-asset_3 = Asset.create(name: "Ethereum", price: 25.60)
-asset_4 = Asset.create(name: "Itau", price: 12.50)
+asset_1 = Holding.create(name: "Bitcoin", price: 65.75)
+asset_2 = Holding.create(name: "Petrobras", price: 32.50)
+asset_3 = Holding.create(name: "Ethereum", price: 25.60)
+asset_4 = Holding.create(name: "Itau", price: 12.50)
 puts "assets created"
 
 puts "creating wallets..."
