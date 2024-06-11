@@ -1,1 +1,8 @@
-<p>Wallet Index</p>
+<h1>My Wallets</h1>
+
+<% @wallets.each do |wallet|%>
+  <%= link_to wallet.name, wallet_path(wallet) %>
+<% end %>
+
+<%= link_to "create new wallet", new_wallet_path %>
+<%= link_to "home", root_path %>
