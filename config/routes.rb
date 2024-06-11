@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'operations/new'
-  get 'operations/create'
-  get 'operations/destroy'
-  get 'holdings/index'
-  get 'holdings/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -15,5 +10,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :wallets
+  resources :wallets do
+    resources :operations, only: %i[new create]
+  end
+  resources :operations, only: %i[destroy]
+  resources :holdings, only: %i[index show]
 end
