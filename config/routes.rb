@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'operations/new'
+  get 'operations/create'
+  get 'operations/destroy'
   get 'holdings/index'
   get 'holdings/show'
   devise_for :users
