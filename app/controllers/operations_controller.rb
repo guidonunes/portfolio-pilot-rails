@@ -1,4 +1,5 @@
 class OperationsController < ApplicationController
+  before_action :set_operation, only: [:destroy]
   def new
     @wallet = Wallet.find(params[:wallet_id])
     @operation = Operation.new
@@ -15,10 +16,13 @@ class OperationsController < ApplicationController
       redirect_to wallet_path(@wallet)
     else
       render :new
+      @operation = Operation.new
     end
   end
 
   def destroy
+    @operation.destroy
+    redirect_to wallet_path(@wallet), notice: "You succesfully delete the transaction"
   end
 
   private

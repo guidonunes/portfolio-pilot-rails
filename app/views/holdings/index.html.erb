@@ -1,11 +1,8 @@
 <h1>Holdings#index</h1>
 
 <div id="holdings">
-  <% holdings.each do |holding| %>
+  <% @holdings.each do |holding| %>
     <h3><%= holding.name%></h3>
     <p><%= holding.price%></p>
   <% end %>
-  <p>
-    <%= link_to "Show details"%> #update path later
-  </p>
 </div>
