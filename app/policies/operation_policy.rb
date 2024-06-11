@@ -9,7 +9,10 @@ class OperationPolicy < ApplicationPolicy
     record.wallet.user == user
   end
 
-
+  def destroy?
+    record.user == user
+  end
+  
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve

@@ -1,6 +1,12 @@
 <p>Wallet</p>
 
 <%= @wallet.name %>
+<% @wallet.operations.each do |operation| %>
+  <ul>
+    <li> Initial Price: <%= operation.initial_price %></li>
+    <li> Quantity: <%= operation.quantity %></li>
+  </ul>
+<% end %>
 
 <div>
   <%= link_to "Edit this wallet", edit_wallet_path(@wallet) %> |
