@@ -1,4 +1,4 @@
-class Stock < ApplicationRecord
+class Operation < ApplicationRecord
   belongs_to :holding
   belongs_to :wallet
 
