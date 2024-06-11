@@ -31,9 +31,9 @@ wallet_2 = Wallet.create(name: "Moonshots", user: user_2)
 puts "wallets created"
 
 puts "creating stocks..."
-Stock.create(asset: asset_1, wallet: wallet_1, quantity: 3, initial_price: 12.10)
-Stock.create(asset: asset_2, wallet: wallet_2, quantity: 4, initial_price: 2.10)
+Stock.create(holding: asset_1, wallet: wallet_1, quantity: 3, initial_price: 12.10)
+Stock.create(holding: asset_2, wallet: wallet_2, quantity: 4, initial_price: 2.10)
 
-Stock.create(asset: asset_3, wallet: wallet_1, quantity: 2, initial_price: 7.10)
-Stock.create(asset: asset_4, wallet: wallet_2, quantity: 8, initial_price: 2.10)
+Stock.create(holding: asset_3, wallet: wallet_1, quantity: 2, initial_price: 7.10)
+Stock.create(holding: asset_4, wallet: wallet_2, quantity: 8, initial_price: 2.10)
 puts "stocks created"
