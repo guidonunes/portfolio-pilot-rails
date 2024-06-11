@@ -1,11 +1,11 @@
 class WalletsController < ApplicationController
+  before_action :set_wallet, only: %i[show edit update destroy]
 
   def index
     @wallets = Wallet.all
   end
 
   def show
-    @wallet = Wallet.find(params[:id])
   end
 
   def new
@@ -23,7 +23,6 @@ class WalletsController < ApplicationController
   end
 
   def edit
-    @wallet = Wallet.find(params[:id])
   end
 
   def update
@@ -35,12 +34,15 @@ class WalletsController < ApplicationController
   end
 
   def destroy
-    @wallet = Wallet.find(params[:id])
     @wallet.destroy!
     redirect_to wallets_path
   end
 
   private
+
+  def set_wallet
+    @wallet = Wallet.find(params[:id])
+  end
 
   def wallet_params
     params.require(:wallet).permit(:name)
