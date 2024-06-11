@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_11_144614) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_11_153537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,13 +22,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_144614) do
   end
 
   create_table "operations", force: :cascade do |t|
-    t.bigint "asset_id", null: false
     t.bigint "wallet_id", null: false
     t.float "quantity"
     t.float "initial_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asset_id"], name: "index_operations_on_asset_id"
+    t.bigint "holding_id", null: false
+    t.index ["holding_id"], name: "index_operations_on_holding_id"
     t.index ["wallet_id"], name: "index_operations_on_wallet_id"
   end
 
@@ -54,7 +54,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_144614) do
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
-  add_foreign_key "operations", "holdings", column: "asset_id"
+  add_foreign_key "operations", "holdings"
   add_foreign_key "operations", "wallets"
   add_foreign_key "wallets", "users"
 end
