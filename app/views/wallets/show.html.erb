@@ -6,5 +6,6 @@
   <%= link_to "Edit this wallet", edit_wallet_path(@wallet) %> |
   <%= link_to "Back to wallets", wallets_path %>
 
+<%= link_to "add operation", new_wallet_operation_path(@wallet)%>
   <%= button_to "Destroy this wallet", @wallet, method: :delete %>
 </div>
