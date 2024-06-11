@@ -14,7 +14,7 @@ class WalletsController < ApplicationController
   end
 
   def create
-    @wallet = Wallet.new(params[:wallet_params])
+    @wallet = Wallet.new(wallet_params)
     authorize @wallet
     @wallet.user = current_user
     if @wallet.save
