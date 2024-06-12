@@ -1,0 +1,25 @@
+
+// Centering the card on the screen
+.new-wallet-card-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; // Make the container full height
+}
+
+.new-wallet-card {
+  width: 100%;
+  max-width: 600px; // Max width for the card
+  margin: 100px auto;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: Add some shadow for a better look
+}
+
+// Optional: Custom styles for the card title
+.new-wallet-card-title {
+  font-size: 48px;
+  font-family: $headers-font;
+  color: $midnight-blue;
+  margin-bottom: 64px;
+}
