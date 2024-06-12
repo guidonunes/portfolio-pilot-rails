@@ -19,10 +19,16 @@ user_2 = User.create!(first_name: "Vitalik", last_name: "Buterin", email: "vital
 puts "user created"
 
 puts "creating assets..."
-asset_1 = Holding.create!(name: "Bitcoin", price: 65.75)
-asset_2 = Holding.create!(name: "Petrobras", price: 32.50)
-asset_3 = Holding.create!(name: "Ethereum", price: 25.60)
-asset_4 = Holding.create!(name: "Itau", price: 12.50)
+asset_1 = Holding.create!(name: "Bitcoin", price: 6435.75, asset_type: "crypto")
+asset_2 = Holding.create!(name: "Petrobras", price: 32.50, asset_type: "fiat")
+asset_3 = Holding.create!(name: "Ethereum", price: 25.60, asset_type: "crypto")
+asset_4 = Holding.create!(name: "Itau", price: 123.50, asset_type: "fiat")
+asset_5 = Holding.create!(name: "Shiba", price: 343.50, asset_type: "crypto")
+asset_6 = Holding.create!(name: "Monero", price: 215.60, asset_type: "crypto")
+asset_7 = Holding.create!(name: "XTC", price: 122.50, asset_type: "crypto")
+asset_8 = Holding.create!(name: "Bovespa index", price: 302.50, asset_type: "fiat")
+asset_9 = Holding.create!(name: "Bradesco", price: 242.60, asset_type: "fiat")
+asset_10 = Holding.create!(name: "Ambev", price: 12.53, asset_type: "fiat")
 puts "assets created"
 
 puts "creating wallets..."
