@@ -1,11 +1,12 @@
 <div class="trending-assets-section p-5">
+  <h1 class="mb-5">Trending Now</h1>
   <div class="container">
     <div class="column">
-      <h2>Cryptocurrencies Trending Now</h2>
+      <h2>Cryptocurrencies</h2>
       <div class="card">
         <% @holdings.where(asset_type: "crypto").first(5).each do |holding|%>
-         <% symbols = ["📈", "🔥", "🎇", "❇️"] %>
-           <ul class="d-flex justify-content-between"><ol><%= symbols.sample %><%= holding.name %> </ol>
+         <% symbols = ["📈 ", "🔥 ", "🎇 ", "❇️ "] %>
+           <ul class="d-flex justify-content-between p-0"><ol><%= symbols.sample %><%= holding.name %> </ol>
         <ol>$ <%= holding.price %></ol>
         </ul>
         <% end %>
@@ -13,11 +14,11 @@
       <!-- Additional cards for cryptocurrencies -->
     </div>
     <div class="column">
-      <h2>Stocks Trending Now</h2>
+      <h2>Stocks</h2>
       <div class="card">
         <% @holdings.where(asset_type: "fiat").first(5).each do |holding|%>
-        <% symbols = ["🔥", "💯", "💥", "💰", "💴"] %>
-        <ul class="d-flex justify-content-between"><ol><%= symbols.sample %><%= holding.name %> </ol>
+        <% symbols = ["🔥 ", "💯 ", "💥 ", "💰 ", "💴 "] %>
+        <ul class="d-flex justify-content-between p-0"><ol><%= symbols.sample %><%= holding.name %> </ol>
         <ol>$ <%= holding.price %></ol>
         </ul>
         <% end %>
