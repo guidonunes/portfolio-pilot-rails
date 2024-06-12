@@ -1,8 +1,53 @@
-<h1>My Wallets</h1>
+<div class="container mt-4 mb-4">
+  <h1>Welcome, <%= current_user.first_name %></h1>
+</div>
 
-<% @wallets.each do |wallet|%>
-  <%= link_to wallet.name, wallet_path(wallet) %>
-<% end %>
+<div class="container d-flex justify-content-center">
+  <div class="d-flex justify-content-center">
+    <div class="card-total-balance">
+      <div class="card-content">
+        <div class="balance-title">Total Estimated Investement Value</div>
+        <div class="separator"></div>
+        <div class="balance">
+          <div class="balance-left">
+            <div class="currency mt-2">$</div>
+          </div>
+          <div class="balance-right">
+            <div class="balance-amount">XXXXXXXXX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to "create new wallet", new_wallet_path %>
-<%= link_to "home", root_path %>
+<div class="container">
+  <div class="card-general-vision">
+    <h2>My Wallets</h2>
+    <%= link_to "new wallet", new_wallet_path, class: "btn btn-ghost text-decoration-none" %>
+    <div class="card-grid">
+      <% @wallets.each do |wallet|%>
+        <div class="card-my-wallets-preview mt-3">
+          <div class="card-content">
+            <div class="balance">
+              <div class="balance-left">
+                <div class="currency">$</div>
+              </div>
+              <div class="balance-right">
+                <div class="balance-title"><%= link_to wallet.name, wallet_path(wallet), class: "text-decoration-none" %></div>
+                <div class="balance-amount">500.000,00</div>
+              </div>
+            </div>
+            <div class="separator"></div>
+            <div class="actions">
+              <div class="history">
+                <i class="fa-solid fa-arrow-right-to-bracket" style="color: #000000;"></i>
+                <%= link_to "View Wallet", wallet_path(wallet), class: "text-decoration-none" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
