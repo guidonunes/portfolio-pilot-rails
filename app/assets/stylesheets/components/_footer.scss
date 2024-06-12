@@ -15,44 +15,46 @@ body {
   line-height: normal;
   background-color: $midnight-blue;
   color: $soft-white;
-    .footer-title {
-      font-family: $headers-font;
-      color: $soft-white;
-    }
+  margin-top: auto;
 
-    .footer-link {
-      font-size: 16px;
+  .footer-title {
+    font-family: $headers-font;
+    color: $soft-white;
+  }
+
+  .footer-link {
+    font-size: 16px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
       list-style-type: none;
-      padding: 0;
-      margin: 0;
+      margin-bottom: 10px;
 
-      li {
-        list-style-type: none;
-        margin-bottom: 10px;
+      &:not(.footer-icon) {
+        margin: 5px 0;
+      }
 
-        &:not(.footer-icon) {
-          margin: 5px 0;
-        }
+      &.footer-icon {
+        display: inline-block;
+        margin: 0 10px;
 
-        &.footer-icon {
-          display: inline-block;
-          margin: 0 10px;
+        a {
+          color: $soft-white;
+          font-size: 24px;
+          transition: color 0.3s ease;
 
-          a {
-            color: $soft-white;
-            font-size: 24px;
-            transition: color 0.3s ease;
-
-            &:hover {
-              color: $gold; // Change this color to whatever you prefer for the hover effect
-            }
+          &:hover {
+            color: $gold; // Change this color to whatever you prefer for the hover effect
           }
         }
       }
+    }
 
-      &.d-flex {
-        display: flex;
-        align-items: center;
-      }
+    &.d-flex {
+      display: flex;
+      align-items: center;
     }
   }
+}
