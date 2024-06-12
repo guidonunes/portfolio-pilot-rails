@@ -1,0 +1,34 @@
+.trending-assets-section {
+  padding: 50px 20px;
+  background-color: $midnight-blue; // Light background color for contrast with the banner
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .column {
+      flex: 1 1 45%; // Flexible basis for responsiveness
+      margin: 20px;
+
+      h2 {
+        font-size: 24px;
+        font-family: $headers-font;
+        margin-bottom: 15px;
+        color: $gold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .card {
+        background-color: $soft-white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+
+        // Additional card styling
+      }
+    }
+  }
+}

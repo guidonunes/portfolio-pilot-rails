@@ -1,0 +1,40 @@
+.features-section {
+  padding: 50px 20px;
+  background-color: $soft-white; // Light background color for contrast with the banner
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    flex: 1 1 250px; // Flexible basis for responsiveness
+    margin: 20px;
+    padding: 36px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .icon {
+      font-size: 36px;
+      color: $sky-blue; // Accent color for icons
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: $midnight-blue; // Primary text color
+    }
+
+    p {
+      font-size: 16px;
+      color: $charcoal; // Secondary text color
+    }
+  }
+}
