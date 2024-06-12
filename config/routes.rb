@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   resources :wallets do
     resources :operations, only: %i[new create]
   end
-  resources :operations, only: %i[destroy]
+  resources :operations, only: %i[edit update destroy]
   resources :holdings, only: %i[index show]
 end
