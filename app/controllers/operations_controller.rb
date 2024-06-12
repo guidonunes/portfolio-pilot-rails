@@ -1,6 +1,6 @@
 class OperationsController < ApplicationController
-  before_action :set_operation, only: [:destroy]
-  before_action :set_wallet, only: [:new, :create, :destroy]
+  before_action :set_operation, only: [:edit, :update, :destroy]
+  before_action :set_wallet, only: [:new, :create]
 
   def new
     @operation = Operation.new
@@ -20,13 +20,28 @@ class OperationsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @operation.update(operation_params)
+      redirect_to wallet_path(@operation.wallet)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
-    @operation.destroy
-    authorize @operation
-    redirect_to wallet_path(@wallet), notice: "You succesfully deleted the transaction"
+    @operation.destroy!
+    redirect_to wallet_path(@operation.wallet), notice: "You succesfully deleted the transaction"
   end
 
   private
+
+  def set_operation
+    @operation = Operation.find(params[:id])
+    authorize @operation
+  end
 
   def set_wallet
     @wallet = Wallet.find(params[:wallet_id])

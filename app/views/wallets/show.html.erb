@@ -3,6 +3,8 @@
 <%= @wallet.name %>
 <% @wallet.operations.each do |operation| %>
   <ul>
+    <%= link_to "delete this operation", operation_path(operation) , data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    <%= link_to "edit operation", edit_operation_path(operation) %>
     <li> Name: <%= operation.holding.name  %></li>
     <li> Initial Price: <%= operation.initial_price %></li>
     <li> Quantity: <%= operation.quantity %></li>
