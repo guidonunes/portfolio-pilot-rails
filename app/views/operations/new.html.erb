@@ -9,18 +9,14 @@
             <%= f.association :holding %>
             <%= f.input :quantity %>
             <%= f.input :avg_buy_price, label: "Price"%>
-            <%= f.submit %>
+            <%= f.submit "Create Operation", class:"btn btn-flat mt-3"%>
            <% end %>
 
           <div class="d-flex justify-content-around">
            <%= link_to "Cancel", wallet_path(@wallet), class:"btn btn-outline-danger mt-3 btn-return" %>
-           <%= f.submit "Create Operation", class:"btn btn-flat mt-3" do %>
-           <% end %>
           </div>
-          <% end %>
       </div>
     </div>
   </div>
   </div>
 </div>
-

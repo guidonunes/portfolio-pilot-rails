@@ -8,22 +8,21 @@
   <div class="wallet-card-container wallet-card">
   <div class="wallet mt-3">
     <h2 class="ms-5 mb-5">Assets</h2>
-    <div class="header d-flex justify-content-between">
+    <div class="grid-header text-center">
       <div class="column">Name</div>
       <div class= "column">Price</div>
       <div class="column">Avg. Price</div>
       <div class="column">Quantity</div>
+      <div class="column">Holdings</div>
       <div class="column">Actions</div>
     </div>
 
     <% @wallet.operations.each do |operation| %>
-      <div class="operation d-flex justify-content-between align-items-center">
-        <div class="column"><%= operation.holding.name %></div>
+      <div class="grid-operation text-center">
+        <div class="column ms-4"><%= operation.holding.name %></div>
         <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
         <div class="column">R$ <%= operation.avg_buy_price %></div>
         <div class="column"><%= operation.quantity %></div>
-
-        <div class="column"><%= operation.avg_buy_price %></div>
         <div class="column"><%= operation.avg_buy_price * operation.quantity %></div>
 
         <div class="column actions">
