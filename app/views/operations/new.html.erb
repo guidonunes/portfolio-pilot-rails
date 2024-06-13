@@ -3,7 +3,6 @@
 <%= simple_form_for [@wallet, @operation] do |f| %>
   <%= f.association :holding %>
   <%= f.input :quantity %>
-  <%= f.input :initial_price %>
-
+  <%= f.input :avg_buy_price, label: "Price"%>
   <%= f.submit %>
 <% end %>
