@@ -1,0 +1,10 @@
+.grid-header, .grid-operation {
+  display: grid;
+  grid-template-columns: repeat(6, 2fr);
+  justify-content: center;
+  align-items: center;
+}
+.grid-header {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
