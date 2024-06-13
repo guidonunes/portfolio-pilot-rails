@@ -1,0 +1,62 @@
+.wallet-title {
+  margin: 48px;
+  font-family: $headers-font;
+  color: $midnight-blue;
+}
+
+.wallet-card-container {
+  background: $soft-white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 2rem;
+
+
+
+  &.wallet-card {
+    .wallet {
+      .header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        margin-bottom: 1rem;
+
+        .column {
+          flex: 1;
+          text-align: center;
+        }
+      }
+
+      .operation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #ddd;
+
+        .column {
+          flex: 1;
+          text-align: center;
+        }
+
+        .actions {
+          display: flex;
+          gap: 0.5rem;
+
+          .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.5rem;
+
+            i {
+              margin-right: 0.25rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
