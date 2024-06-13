@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -5,9 +6,11 @@
         <div class="new-walletcard-body">
           <h1 class="new-wallet-card-title text-center">Create New Operation</h1>
             <%= simple_form_for [@wallet, @operation] do |f| %>
-            <%= f.association :holding%>
+            <%= f.association :holding %>
             <%= f.input :quantity %>
-            <%= f.input :initial_price %>
+            <%= f.input :avg_buy_price, label: "Price"%>
+            <%= f.submit %>
+           <% end %>
 
           <div class="d-flex justify-content-around">
            <%= link_to "Cancel", wallet_path(@wallet), class:"btn btn-outline-danger mt-3 btn-return" %>
@@ -20,3 +23,4 @@
   </div>
   </div>
 </div>
+

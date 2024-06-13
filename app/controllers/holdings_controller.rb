@@ -23,8 +23,6 @@ class HoldingsController < ApplicationController
   def holding_params
     params.requiere(:holding).permit(:name, :price, :asset_type)
   end
-
-
 end
 
 
