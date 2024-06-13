@@ -13,7 +13,6 @@
       <div class= "column">Price</div>
       <div class="column">Avg. Price</div>
       <div class="column">Quantity</div>
-
       <div class="column">Actions</div>
     </div>
 
@@ -23,6 +22,9 @@
         <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
         <div class="column">R$ <%= operation.avg_buy_price %></div>
         <div class="column"><%= operation.quantity %></div>
+
+        <div class="column"><%= operation.avg_buy_price %></div>
+        <div class="column"><%= operation.avg_buy_price * operation.quantity %></div>
 
         <div class="column actions">
           <%= link_to  new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm" do %>
