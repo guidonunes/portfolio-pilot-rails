@@ -1,9 +1,22 @@
-<h1>Operations#new</h1>
-<p>Find me in app/views/operations/new.html.erb</p>
-<%= simple_form_for [@wallet, @operation] do |f| %>
-  <%= f.association :holding %>
-  <%= f.input :quantity %>
-  <%= f.input :initial_price %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="new-wallet-card">
+        <div class="new-walletcard-body">
+          <h1 class="new-wallet-card-title text-center">Create New Operation</h1>
+            <%= simple_form_for [@wallet, @operation] do |f| %>
+            <%= f.association :holding%>
+            <%= f.input :quantity %>
+            <%= f.input :initial_price %>
 
-  <%= f.submit %>
-<% end %>
+          <div class="d-flex justify-content-around">
+           <%= link_to "Cancel", wallet_path(@wallet), class:"btn btn-outline-danger mt-3 btn-return" %>
+           <%= f.submit "Create Operation", class:"btn btn-flat mt-3" do %>
+           <% end %>
+          </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -12,6 +12,18 @@
   }
 }
 
+.btn-return {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #ff000073;
+  text-decoration: none;
+  border-radius: 5px; // Adjust as needed
+
+  &:hover {
+    background-color: (#eb5b5b53, 10%);
+  }
+}
 
 .btn-action {
   display: inline-block;
