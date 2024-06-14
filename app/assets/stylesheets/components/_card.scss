@@ -25,12 +25,13 @@
 .card-total-balance {
   margin: 0 auto;
   width: 720px;
-  border-radius: 2px;
+  border-radius: 16px;
   background-color: #ffffff;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14), 0 10px 10px -4px rgba(0, 0, 0, 0.09);
   margin-bottom: 25px;
   float: left;
   margin-left: 25px;
+  transition: transform 2s;
 
   body {
     padding-top: 25px;
@@ -40,7 +41,7 @@
   }
 
   .card-content {
-    padding: 15px 20px 10px;;
+    padding: 15px 20px 10px;
     color: #4a4a4a;
   }
 
@@ -75,16 +76,38 @@
   }
 }
 
-
 .card-general-vision {
   margin: 0 auto;
-  border-radius: 2px;
-  background-color: $midnight-blue;
+  border-radius: 16px;
+  background-image: url('doge-whale.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative; // Added to position the overlay correctly
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14), 0 10px 10px -4px rgba(0, 0, 0, 0.09);
   padding: 24px;
+  overflow: hidden; // Ensures the overlay stays within the border radius
 
-  .h2 {
-    color: $white;
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); // Adjust the opacity as needed
+    border-radius: 16px; // Matches the border-radius of the container
+    z-index: 1; // Places the overlay above the background but below the content
+  }
+
+  h2 {
+    position: relative; // Ensures the text appears above the overlay
+    color: $soft-white;
+    font-family: $headers-font;
+    font-size: 36px;
+    padding: 16px;
+    z-index: 2; // Places the text above the overlay
   }
 }
 
@@ -92,23 +115,26 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 24px;
+  position: relative;
+  z-index: 2; // Places the content above the overlay
 }
 
 .card-my-wallets-preview {
-  border-radius: 2px;
-  background-color: #ffffff;
+  border-radius: 16px;
+  background-color: $soft-white;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14), 0 10px 10px -4px rgba(0, 0, 0, 0.09);
-
+  position: relative;
+  z-index: 2; // Places the content above the overlay
 
   body {
     padding-top: 25px;
-    background-color: #f6f6f6;
+    background-color: $soft-white;
     font-family: $body-font;
     -webkit-font-smoothing: antialiased;
   }
 
   .card-content {
-    padding: 15px 20px 10px;;
+    padding: 15px 20px 10px;
     color: #4a4a4a;
   }
 
@@ -145,65 +171,20 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
-
     font-size: 13px;
     font-weight: 600;
     color: $gray;
     transition: 3.3s;
 
-  }
+    a {
+      transition: color 0.2s ease;
 
-  .actions a {
-    transition: color 0.2s ease;
+      &:hover {
+        color: $sky-blue;
+      }
+    }
   }
-
-  .actions a:hover {
-    color: $sky-blue;
+  &:hover {
+    transform: scale(1.1); // Apply the scale transformation on hover
   }
-
-  /**** green ****/
-  .green {
-    background-color: #0e9e5a;
-  }
-
-  .orange {
-    background-color: #e8893c;
-  }
-
-  .red {
-    background-color: #ce593f;
-  }
-
-  .black {
-    background-color: rgba(0, 0, 0, .8);
-  }
-
-  .green .card-content,
-  .orange .card-content,
-  .red .card-content,
-  .black .card-content{
-    color: #fff;
-  }
-
-  .green .actions,
-  .orange .actions,
-  .red .actions,
-  .black .actions {
-    color: rgba(256, 256, 256, .8);
-  }
-
-  .green .actions a:hover,
-  .orange .actions a:hover,
-  .red .actions a:hover,
-  .black .actions a:hover {
-    color: rgba(256, 256, 256, 1);
-  }
-
-  .green .separator,
-  .orange .separator,
-  .red .separator,
-  .black .separator{
-    border-bottom: solid 1px rgba(256, 256, 256, .4);
-  }
-
 }
