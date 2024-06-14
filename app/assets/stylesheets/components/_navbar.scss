@@ -1,13 +1,14 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: $soft-white;
+  background: $midnight-blue;
 
   .nav-link {
     font-size: 16px;
+    color: $soft-white;
 
     &:hover {
       font-weight: 500;
-      color: $midnight-blue;
+      color: $gold;
     }
   }
 

@@ -1,5 +1,5 @@
-<div class="container mt-4 mb-4">
-  <h1>Welcome, <%= current_user.first_name %></h1>
+<div class="container mt-5 mb-5">
+  <h1 class= "dashboard-title tracking-in-expand">Welcome, <span class="dashboard-user"><%= current_user.first_name%>!</span></h1>
 </div>
 
 <div class="container d-flex justify-content-center">
@@ -10,10 +10,10 @@
         <div class="separator"></div>
         <div class="balance">
           <div class="balance-left">
-            <div class="currency mt-2">$</div>
+            <div class="currency mt-2 p-3">R$</div>
           </div>
           <div class="balance-right">
-            <div class="balance-amount">XXXXXXXXX</div>
+            <div class="balance-amount p-3"><strong>************ </strong><i class="fa-solid fa-eye-slash p3"></i></div>
           </div>
         </div>
       </div>
@@ -22,17 +22,17 @@
 </div>
 
 
-<div class="container">
-  <div class="card-general-vision">
+<div class="container mb-5">
+    <%= link_to "New Wallet", new_wallet_path, class: "btn btn-flat text-decoration-none mb-3" %>
+  <div class="card-general-vision p-5">
     <h2>My Wallets</h2>
-    <%= link_to "new wallet", new_wallet_path, class: "btn btn-ghost text-decoration-none" %>
     <div class="card-grid">
       <% @wallets.each do |wallet|%>
         <div class="card-my-wallets-preview mt-3">
           <div class="card-content">
             <div class="balance">
               <div class="balance-left">
-                <div class="currency">$</div>
+                <div class="currency">R$</div>
               </div>
               <div class="balance-right">
                 <div class="balance-title"><%= link_to wallet.name, wallet_path(wallet), class: "text-decoration-none" %></div>
