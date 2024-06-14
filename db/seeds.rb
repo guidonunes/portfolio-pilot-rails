@@ -46,15 +46,15 @@ asset_23 = Holding.create!(name: "Petoshi", price: 0.07, asset_type: "crypto", a
 asset_24 = Holding.create!(name: "Kirokugo", price: 0.0016, asset_type: "crypto", abreviation: 'KIRO')
 
 
-asset_50 = Holding.create!(name: "Petrobras", price: 32.50, asset_type: "fiat",  abreviation: 'PTR4')
-asset_51 = Holding.create!(name: "CIELO ON", price: 25.60, asset_type: "fiat", abreviation: 'CIEL3')
-asset_52 = Holding.create!(name: "Itau", price: 123.50, asset_type: "fiat", abreviation: 'ITUB4')
-asset_53 = Holding.create!(name: "Cogna Educacao SA", price: 343.50, asset_type: "fiat", abreviation: 'COGN4')
-asset_54 = Holding.create!(name: "Magazine Luiza SA ", price: 215.60, asset_type: "fiat", abreviation: 'MGLU3')
-asset_55 = Holding.create!(name: "Raizen SA Preferred", price: 122.50, asset_type: "fiat", abreviation: 'RAIZ4')
-asset_56 = Holding.create!(name: "Bovespa index", price: 302.50, asset_type: "fiat", abreviation: 'BVSP')
-asset_57 = Holding.create!(name: "Bradesco", price: 242.60, asset_type: "fiat", abreviation: 'BBDC4')
-asset_58 = Holding.create!(name: "Ambev", price: 12.53, asset_type: "fiat", abreviation: 'ABEV3')
+asset_50 = Holding.create!(name: "Petrobras", price: 32.50, asset_type: "fiat",  abreviation: 'DAI')
+asset_51 = Holding.create!(name: "CIELO ON", price: 25.60, asset_type: "fiat", abreviation: 'AVAX')
+asset_52 = Holding.create!(name: "Itau", price: 123.50, asset_type: "fiat", abreviation: 'DAI')
+asset_53 = Holding.create!(name: "Cogna Educacao SA", price: 343.50, asset_type: "fiat", abreviation: 'AVAX')
+asset_54 = Holding.create!(name: "Magazine Luiza SA ", price: 215.60, asset_type: "fiat", abreviation: 'LINK')
+asset_55 = Holding.create!(name: "Raizen SA Preferred", price: 122.50, asset_type: "fiat", abreviation: 'DAI')
+asset_56 = Holding.create!(name: "Bovespa index", price: 302.50, asset_type: "fiat", abreviation: 'DAI')
+asset_57 = Holding.create!(name: "Bradesco", price: 242.60, asset_type: "fiat", abreviation: 'DAI')
+asset_58 = Holding.create!(name: "Ambev", price: 12.53, asset_type: "fiat", abreviation: 'DAI')
 puts "assets created"
 
 puts "creating wallets..."
