@@ -14,6 +14,22 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: Add some shadow for a better look
 }
 
+.sign-up-card {
+  width: 100%;
+  max-width: 600px; // Max width for the card
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: Add some shadow for a better look
+}
+
+.sign-up-card-title {
+  font-size: 48px;
+  font-family: $headers-font;
+  color: $midnight-blue;
+  margin-bottom: 30px;
+}
+
 // Optional: Custom styles for the card title
 .new-wallet-card-title {
   font-size: 48px;
@@ -187,4 +203,12 @@
   &:hover {
     transform: scale(1.1); // Apply the scale transformation on hover
   }
+}
+
+.card-holdings-quantity {
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: $soft-white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14), 0 10px 10px -4px rgba(0, 0, 0, 0.09);
+  padding: 24px;
 }
