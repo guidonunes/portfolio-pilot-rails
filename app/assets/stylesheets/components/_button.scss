@@ -12,16 +12,18 @@
   }
 }
 
-.btn-return {
+.btn-cancel {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
-  color: #ff000073;
+  color: $charcoal;
+  background-color: $gold;
   text-decoration: none;
   border-radius: 5px; // Adjust as needed
 
   &:hover {
-    background-color: (#eb5b5b53, 10%);
+    background-color: darken(#eb5b5b53, 10%);
+    color: $soft-white;
   }
 }
 
