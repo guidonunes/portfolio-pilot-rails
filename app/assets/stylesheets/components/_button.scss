@@ -9,6 +9,7 @@
 
   &:hover {
     background-color: darken(#5BC0EB, 10%);
+    color: $soft-white;
   }
 }
 
@@ -22,7 +23,7 @@
   border-radius: 5px; // Adjust as needed
 
   &:hover {
-    background-color: darken(#eb5b5b53, 10%);
+    background-color: darken($gold, 10%);
     color: $soft-white;
   }
 }
