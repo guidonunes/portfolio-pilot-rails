@@ -1,33 +1,32 @@
-
 <h1 class="wallet-title text-center jello-horizontal"><%= @wallet.name %></h1>
 
 <div class="container">
   <div class="d-flex justify-content-end">
-      <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
+    <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
   </div>
 
   <div class="d-flex justify-content-between">
     <%= render "layouts/overview" %>
     <div class="card-holdings-quantity mb-4 mx-3" style="width: 50%;">
       <h2 class=p-3>Allocation</h2>
-        <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data"  %>
+      <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data" %>
     </div>
   </div>
-
-
 
   <div class="wallet-card-container wallet-card">
     <div class="wallet">
       <div class="d-flex justify-content-between mb-5">
         <h2>Assets</h2>
         <div>
-            <%= link_to "Add new operation", new_wallet_operation_path(@wallet), class: "btn btn-wallet"%>
-            <%= link_to "Edit this wallet", edit_wallet_path(@wallet), class: "btn btn-wallet"%>
+          <button type="button" class="btn btn-wallet" data-bs-toggle="modal" data-bs-target="#addOperationModal">
+            Add new operation
+          </button>
+          <%= link_to "Edit Wallet Name", edit_wallet_path(@wallet), class: "btn btn-wallet", data: { bs_toggle: "modal", bs_target: "#nameOperationModal" }%>
         </div>
       </div>
       <div class="grid-header text-center">
         <div class="column">Name</div>
-        <div class= "column">Price</div>
+        <div class="column">Price</div>
         <div class="column">Avg. Price</div>
         <div class="column">Quantity</div>
         <div class="column">Holdings</div>
@@ -43,18 +42,65 @@
           <div class="column"><%= operation.avg_buy_price * operation.quantity %></div>
 
           <div class="column actions mb-3">
-            <%= link_to  new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm" do %>
+            <%= link_to new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } do %>
               <i class="fa-solid fa-plus"></i>
             <% end %>
-            <%= link_to edit_operation_path(operation), class: "btn btn-action btn-sm" do %>
+
+           <%= link_to edit_operation_path(operation), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } do %>
               <i class="fa fa-edit"></i>
-            <% end %>
+           <% end %>
+
             <%= link_to operation_path(operation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-action btn-sm" do %>
               <i class="fa fa-trash"></i>
             <% end %>
           </div>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal - Add New Operation -->
+<div class="modal fade" id="addOperationModal" tabindex="-1" aria-labelledby="addOperationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title wobble-ver-left" id="addOperationModalLabel">Add New Operation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "onew", operation: Operation.new(wallet: @wallet) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal - Edit Operation -->
+<div class="modal fade" id="editOperationModal" tabindex="-1" aria-labelledby="editOperationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title wobble-ver-left" id="editOperationModalLabel">Edit Operation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "oedit", operation: Operation.find(params[:id])%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal - Edit Wallet Name -->
+<div class="modal fade" id="nameOperationModal" tabindex="-1" aria-labelledby="nameOperationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title wobble-ver-left" id="nameOperationModalLabel">Edit Wallet Name</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "form", wallet: Wallet.find(params[:id])%>
+      </div>
     </div>
   </div>
 </div>

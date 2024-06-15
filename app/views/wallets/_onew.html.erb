@@ -1,0 +1,14 @@
+<%= simple_form_for [@wallet, operation] do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :holding %>
+    <%= f.input :quantity %>
+    <%= f.input :avg_buy_price, label: "Price" %>
+  </div>
+
+  <div class="form-actions d-flex justify-content-center">
+    <%= f.button :submit, "Create Operation", class: "btn btn-flat m-1" %>
+    <%= link_to "Cancel", wallet_path(@wallet), class: "btn btn-cancel m-1 btn-return" %>
+  </div>
+<% end %>
