@@ -1,12 +1,12 @@
 <div class="container mt-5 mb-5">
-  <h1 class= "dashboard-title tracking-in-expand">Welcome, <span class="dashboard-user"><%= current_user.first_name%>!</span></h1>
+  <h1 class="dashboard-title tracking-in-expand">Welcome, <span class="dashboard-user"><%= current_user.first_name %>!</span></h1>
 </div>
 
 <div class="container d-flex justify-content-center">
   <div class="d-flex justify-content-center">
     <div class="card-total-balance">
       <div class="card-content">
-        <div class="balance-title">Total Estimated Investement Value</div>
+        <div class="balance-title">Total Estimated Investment Value</div>
         <div class="separator"></div>
         <div class="balance">
           <div class="balance-left">
@@ -21,13 +21,13 @@
   </div>
 </div>
 
-
 <div class="container mb-5">
-    <%= link_to "New Wallet", new_wallet_path, class: "btn btn-flat text-decoration-none mb-3" %>
+  <%= link_to "New Wallet", wallets_path, class: "btn btn-flat text-decoration-none mb-3", data: { bs_toggle: "modal", bs_target: "#exampleModal" } %>
+
   <div class="card-general-vision p-5">
     <h2>My Wallets</h2>
     <div class="card-grid">
-      <% @wallets.each do |wallet|%>
+      <% @wallets.each do |wallet| %>
         <div class="card-my-wallets-preview mt-3">
           <div class="card-content">
             <div class="balance">
@@ -49,6 +49,21 @@
           </div>
         </div>
       <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Modal - the old new.html.erb is being rendered here. I just copied and pasted the content here-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title wobble-ver-left" id="exampleModalLabel">Create New Wallet</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "form", wallet: Wallet.new %>
+      </div>
     </div>
   </div>
 </div>
