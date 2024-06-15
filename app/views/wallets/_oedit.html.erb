@@ -1,0 +1,15 @@
+<%= simple_form_for operation do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.association :holding %>
+    <%= f.input :quantity %>
+    <%= f.input :avg_buy_price %>
+  </div>
+
+  <div class="form-actions d-flex justify-content-around">
+    <%= f.button :submit, class: "btn btn-flat m-1" %>
+    <%= link_to "Back to my wallet", wallet_path(operation.wallet), class: "btn btn-cancel m-1 btn-return" %>
+  </div>
+<% end %>
