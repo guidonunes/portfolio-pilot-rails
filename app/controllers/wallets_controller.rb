@@ -6,6 +6,9 @@ class WalletsController < ApplicationController
   end
 
   def show
+    performers = @wallet.best_and_worst_performers
+    @best_performer = performers[:best]
+    @worst_performer = performers[:worst]
   end
 
   def new

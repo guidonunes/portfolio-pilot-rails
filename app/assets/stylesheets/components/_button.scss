@@ -37,9 +37,10 @@
   text-decoration: none;
   border-radius: 5px; // Adjust as needed
   justify-content: right;
+  transition: transform 0.2s;
 
   &:hover {
-    background-color: darken($gold, 10%);
+    transform: scale(1.8); // Apply the scale transformation on hover
   }
 }
 
