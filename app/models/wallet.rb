@@ -6,7 +6,7 @@ class Wallet < ApplicationRecord
   has_many :holdings, through: :operations
 
   def best_and_worst_performers
-    return if operations.empty?
+    return { best: nil, worst: nil } if operations.empty?
 
     performances = operations.map do |operation|
       current_price = find_full_holding_info(operation.holding.abreviation)["PRICE"]
