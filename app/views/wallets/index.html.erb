@@ -41,7 +41,12 @@
             </div>
             <div class="separator"></div>
             <div class="actions">
-              <div class="history">
+              <div class="delete">
+                <%= link_to wallet_path(wallet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete do %>
+                  <i class="fa-solid fa-trash-can"></i>
+                <% end %>
+              </div>
+              <div class="view-wallet">
                 <i class="fa-solid fa-arrow-right-to-bracket" style="color: #000000;"></i>
                 <%= link_to "View Wallet", wallet_path(wallet), class: "text-decoration-none" %>
               </div>

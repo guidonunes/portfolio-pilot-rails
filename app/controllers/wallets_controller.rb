@@ -44,7 +44,7 @@ class WalletsController < ApplicationController
 
   def destroy
     @wallet.destroy!
-    redirect_to wallets_path
+    redirect_to wallets_path, notice: "You succesfully deleted the wallet"
   end
 
   private
