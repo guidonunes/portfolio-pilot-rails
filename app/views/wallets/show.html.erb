@@ -7,16 +7,58 @@
 
   <div class="d-flex justify-content-between">
     <%= render "layouts/overview" %>
-    <div class="card-holdings-quantity mb-4 mx-3" style="width: 50%;">
-      <h2 class=p-3>Allocation</h2>
+    <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
+      <h2 class="card-title-spec p-3">Allocation</h2>
       <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data" %>
     </div>
   </div>
 
+  <!-- New Section for Best and Worst Performers -->
+  <div class="d-flex justify-content-between mb-4">
+    <!-- Best Performer -->
+    <div class="performer-card m-1" style="width: 49%;">
+      <div class="card-body">
+        <h5 class="card-title-spec text-center p-3 my-3">Best Performer</h5>
+        <% if @best_performer %>
+          <div class="d-flex justify-content-evenly">
+            <p class="performer-card-text px-3 pb-3">
+               <%= @best_performer[:operation].holding.name %>
+            </p>
+            <p class="performer-card-text">
+              <span class="performer-color-up"><i class="fa-solid fa-caret-up"> </i><%= number_with_precision(@best_performer[:performance], precision: 2) %>%</span>
+            </p>
+          </div>
+        <% else %>
+          <p class="performer-card-text">No data available</p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Worst Performer -->
+    <div class="performer-card m-1" style="width: 49%;">
+      <div class="card-body">
+        <h5 class="card-title-spec text-center p-3 my-3">Worst Performer</h5>
+        <% if @worst_performer %>
+          <div class="d-flex justify-content-evenly">
+            <p class="performer-card-text px-3 pb-3">
+               <%= @worst_performer[:operation].holding.name %>
+            </p>
+            <p class="performer-card-text">
+              <span class="performer-color-down"><i class="fa-solid fa-caret-down"></i><%= number_with_precision(@worst_performer[:performance], precision: 2) %>%</span>
+            </p>
+          </div>
+        <% else %>
+          <p class="performer-card-text">No data available</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wallet Assets Display -->
   <div class="wallet-card-container wallet-card">
     <div class="wallet">
       <div class="d-flex justify-content-between mb-5">
-        <h2>Assets</h2>
+        <h2 class="card-title-spec">Assets</h2>
         <div>
           <button type="button" class="btn btn-wallet" data-bs-toggle="modal" data-bs-target="#addOperationModal">
             Add new operation
@@ -27,7 +69,7 @@
       <div class="grid-header text-center">
         <div class="column">Name</div>
         <div class="column">Price</div>
-        <div class="column">Avg. Price</div>
+        <div class="column">Avg. Buy Price</div>
         <div class="column">Quantity</div>
         <div class="column">Holdings</div>
         <div class="column">Actions</div>
@@ -37,9 +79,9 @@
         <div class="grid-operation text-center">
           <div class="column ms-4"><%= operation.holding.name %></div>
           <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
-          <div class="column">R$ <%= operation.avg_buy_price %></div>
+          <div class="column">R$ <%=number_with_precision(operation.avg_buy_price, precision: 2) %></div>
           <div class="column"><%= operation.quantity %></div>
-          <div class="column"><%= operation.avg_buy_price * operation.quantity %></div>
+          <div class="column">R$ <%=number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %></div>
 
           <div class="column actions mb-3">
             <%= link_to new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } do %>
@@ -59,6 +101,8 @@
     </div>
   </div>
 </div>
+
+<!-- BOOTSTRAP MODALS: -->
 
 <!-- Bootstrap Modal - Add New Operation -->
 <div class="modal fade" id="addOperationModal" tabindex="-1" aria-labelledby="addOperationModalLabel" aria-hidden="true">
@@ -84,7 +128,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= render "oedit", operation: Operation.find(params[:id])%>
+        <% if @operation %>
+          <%= render "oedit", operation: @operation %>
+        <% else %>
+          <p>Operation not found.</p>
+        <% end %>
       </div>
     </div>
   </div>
