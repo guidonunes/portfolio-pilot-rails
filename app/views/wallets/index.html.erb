@@ -36,7 +36,9 @@
               </div>
               <div class="balance-right">
                 <div class="balance-title"><%= link_to wallet.name, wallet_path(wallet), class: "text-decoration-none" %></div>
-                <div class="balance-amount">500.000,00</div>
+                <div class="balance-amount"><% total_sum = wallet.operations.sum { |op| op.avg_buy_price * op.quantity } %>
+                  <%= number_with_precision(total_sum, precision: 2) %>
+                  </div>
               </div>
             </div>
             <div class="separator"></div>

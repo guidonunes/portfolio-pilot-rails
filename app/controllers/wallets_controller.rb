@@ -3,6 +3,7 @@ class WalletsController < ApplicationController
 
   def index
     @wallets = policy_scope(Wallet)
+    @wallet_totals = calculate_wallet_totals(@wallets)
   end
 
   def show
@@ -57,5 +58,11 @@ class WalletsController < ApplicationController
 
   def wallet_params
     params.require(:wallet).permit(:name)
+  end
+
+  def calculate_wallet_totals(wallets)
+    wallets.map do |wallet|
+      wallet.operations.sum { |op| op.avg_buy_price * op.quantity }
+    end
   end
 end
