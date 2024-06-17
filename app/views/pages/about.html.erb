@@ -1,9 +1,19 @@
-<div class="container">
-  <div>
-  <h1> About us:</h1>
-
-  </div>
-  <div id="about">
-  <%# <%= image_tag "about.png"%> 
-  </div>
+<div class="about-page-heading">
+  <h1>About us</h1>
+  <p>Our team is composed by Camilly Aoki, Guilherme nunes, Kaio Ghiotti, Julian Vivas.</p>
+</div>
+<div class="container-about">
+  <section class="about">
+    <div class="about-image">
+      <%= image_tag "about.png"%>
+    </div>
+    <div class="about-content">
+      <h2>Our Goal</h2>
+      <p>As students from Le Wagon, we established this initiative with the aim of assisting individuals in organizing all their investments within a single application,
+      thereby saving time and promoting more orderly financial management.</p>
+    </div>
+    <div class="home">
+      <%= link_to "Home", root_path, class:"btn btn-flat"%>
+    </div>
+  </section>
 </div>
