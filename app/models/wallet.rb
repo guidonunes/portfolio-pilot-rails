@@ -26,4 +26,13 @@ class Wallet < ApplicationRecord
       current_price * operation.quantity
     end
   end
+
+  def price_variations
+    operations.map do |operation|
+      {
+        holding: operation.holding,
+        price_variation: find_percentage_holding_info(operation.holding.abreviation)
+      }
+    end
+  end
 end
