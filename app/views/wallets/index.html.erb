@@ -13,7 +13,10 @@
             <div class="currency mt-2 p-3">R$</div>
           </div>
           <div class="balance-right">
-            <div class="balance-amount p-3"><strong>************ </strong><i class="fa-solid fa-eye-slash p3"></i></div>
+            <div class="balance-amount p-3">
+              <strong><%= number_with_precision(@wallet_totals.sum, precision: 2)%></strong>
+              <i class="fa-solid fa-eye-slash p3"></i>
+            </div>
           </div>
         </div>
       </div>
