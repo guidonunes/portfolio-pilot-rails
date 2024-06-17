@@ -19,4 +19,11 @@ class Wallet < ApplicationRecord
 
     { best: best_performer, worst: worst_performer }
   end
+
+  def total_holdings_value
+    operations.sum do |operation|
+      current_price = find_full_holding_info(operation.holding.abreviation)["PRICE"]
+      current_price * operation.quantity
+    end
+  end
 end

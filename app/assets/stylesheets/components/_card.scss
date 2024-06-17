@@ -34,7 +34,8 @@
 
   .card-content {
     padding: 10px 20px 10px;
-    color: #4a4a4a;
+    color: $midnight-blue;
+    font-family: $headers-font;
   }
 
   .balance {
@@ -47,8 +48,9 @@
   }
 
   .currency {
+    font-family: $headers-font;
     font-size: 50px;
-    font-weight: 200;
+    font-weight: 300;
     line-height: 50px;
   }
 
@@ -161,7 +163,7 @@
 
   .actions {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     cursor: pointer;
     font-size: 13px;
     font-weight: 600;
@@ -174,6 +176,9 @@
       &:hover {
         color: $sky-blue;
       }
+    }
+    .fa-trash-can {
+      color: $gold;
     }
   }
   &:hover {
@@ -205,6 +210,8 @@
 
 .performer-card-text {
   font-size: 20px;
+  padding-left: 32px;
+  padding-bottom: 32px;
 }
 
 .performer-color-up {
