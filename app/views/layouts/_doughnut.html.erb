@@ -1,0 +1,68 @@
+<div>
+  <canvas id="allocationChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <%# Feature: get name and amount for the graphs, please do not delete it %>
+  <% @wallet.operations.each do |operation| %>
+    <div class="grid-operation text-center">
+      <div class="column ms-4 holdingname d-none"><%= operation.holding.name %></div>
+      <div class="column"><% number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
+      <div class="column"><% number_with_precision(operation.avg_buy_price, precision: 2) %></div>
+      <div class="column"><% operation.quantity %></div>
+      <div class="column holdingamount d-none"><%= number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %></div>
+
+      <div class="column actions mb-3">
+        <% link_to new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } do %>
+          <i class="fa-solid fa-plus"></i>
+        <% end %>
+
+        <% link_to edit_operation_path(operation), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } do %>
+          <i class="fa fa-edit"></i>
+        <% end %>
+
+        <% link_to operation_path(operation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-action btn-sm" do %>
+          <i class="fa fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%# ------------------------------------------------------------------- %>
+
+<script>
+  const doughnut = document.getElementById('allocationChart');
+
+  // const operationNames = Array.from(document.querySelectorAll('.operation-name'));
+  // const operationQuantities = Array.from(document.querySelectorAll('.operation-quantity'));
+  const holdingNames = Array.from(document.querySelectorAll('.holdingname'));
+  const holdingAmounts = Array.from(document.querySelectorAll('.holdingamount'));
+
+  const names = holdingNames.map(el => el.innerText);
+  const amounts = holdingAmounts.map(el => parseFloat(el.innerText.replace('R$', '').replace(',', '.')));
+
+  new Chart(doughnut, {
+    type: 'doughnut',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Amount of holdings',
+        data: amounts,
+        borderWidth: 1
+      }]
+    },
+  });
+
+  // function UpdateChart() {
+  //   const holdingname = document.getElementById("holdingname");
+  //   const holdingamount = document.getElementById("holdingamount");
+  //   console.log(holdingname);
+  //   console.log(holdingamount);
+
+  //   // allocationChart.data.datasets[0].data.push(holdingamount.value);
+  //   // allocationChart.data.labels.push(holdingname.value);
+
+  //   // allocationChart.update()
+  // }
+
+</script>
