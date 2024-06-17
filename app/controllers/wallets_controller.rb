@@ -15,6 +15,7 @@ class WalletsController < ApplicationController
     @worst_performer = performers[:worst]
     @total_holdings = @wallet.total_holdings_value
     @operation = Operation.find_by(id: params[:id])
+    @price_variations = @wallet.price_variations
   end
 
   def new
