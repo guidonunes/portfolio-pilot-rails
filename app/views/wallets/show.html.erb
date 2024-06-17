@@ -44,7 +44,8 @@
     <!-- Allocation Pie Chart -->
     <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
       <h2 class="card-title-spec p-3">Allocation</h2>
-      <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data" %>
+      <%= render "layouts/doughnut" %>
+      <%# <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data" %>
     </div>
   </div>
 
@@ -113,11 +114,11 @@
 
       <% @wallet.operations.each do |operation| %>
         <div class="grid-operation text-center">
-          <div class="column ms-4"><%= operation.holding.name %></div>
+          <div class="column ms-4 holdingname"><%= operation.holding.name %></div>
           <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
           <div class="column">R$ <%=number_with_precision(operation.avg_buy_price, precision: 2) %></div>
           <div class="column"><%= operation.quantity %></div>
-          <div class="column">R$ <%=number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %></div>
+          <div class="column holdingamount">R$ <%=number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %></div>
 
           <div class="column actions mb-3">
             <%= link_to new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } do %>
