@@ -9,7 +9,8 @@
             <div class="currency mt-2">R$</div>
           </div>
           <div class="balance-right">
-            <div class="balance-amount">*************</div>
+             <div class="balance-amount"><%= number_with_precision(@total_holdings, precision: 2) %></div>
+          </div>
           </div>
         </div>
       </div>

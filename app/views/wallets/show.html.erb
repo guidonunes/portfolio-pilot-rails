@@ -5,8 +5,43 @@
     <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
   </div>
 
+  <!-- Updated section to include the total value card and the allocation pie chart side by side -->
   <div class="d-flex justify-content-between">
-    <%= render "layouts/overview" %>
+
+    <!-- Total Value Card -->
+    <div class="d-flex justify-content-center">
+      <div class="card-total-balance">
+        <div class="card-content">
+          <div class="balance-title"><h2 class="card-title-spec p-5">Wallet Estimated Value</h2></div>
+          <div class="separator"></div>
+          <div class="balance">
+            <div class="balance-left">
+              <div class="currency mt-5 ps-5">R$</div>
+            </div>
+            <div class="balance-right">
+              <div class="balance-amount pe-5 mt-5"><%= number_with_precision(@total_holdings, precision: 2) %></div>
+            </div>
+          </div>
+
+          <!--Display appreciation/depreciation-->
+            <div class="d-flex justify-content-end pe-5">
+              <% if @total_holdings > @wallet.total_holdings_value %>
+                <div class="appreciation emerald-green">
+                  <i class="fa-solid fa-caret-up"></i>
+                  <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                </div>
+              <% elsif @total_holdings < @wallet.total_holdings_value %>
+                <div class="appreciation ruby">
+                  <i class="fa-solid fa-caret-down"></i>
+                  <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+              </div>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Allocation Pie Chart -->
     <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
       <h2 class="card-title-spec p-3">Allocation</h2>
       <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data" %>
@@ -15,6 +50,7 @@
 
   <!-- New Section for Best and Worst Performers -->
   <div class="d-flex justify-content-between mb-4">
+
     <!-- Best Performer -->
     <div class="performer-card m-1" style="width: 49%;">
       <div class="card-body">
@@ -129,7 +165,7 @@
       </div>
       <div class="modal-body">
         <% if @operation %>
-          <%= render "oedit", operation: @operation %>
+          <%= render "oedit", operation: Operation.find(params[:id])%>
         <% else %>
           <p>Operation not found.</p>
         <% end %>

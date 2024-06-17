@@ -12,6 +12,7 @@ class WalletsController < ApplicationController
     performers = @wallet.best_and_worst_performers
     @best_performer = performers[:best]
     @worst_performer = performers[:worst]
+    @total_holdings = @wallet.total_holdings_value
     @operation = Operation.find_by(id: params[:id])
   end
 
