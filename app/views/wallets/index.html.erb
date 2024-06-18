@@ -10,10 +10,22 @@
         <div class="separator"></div>
         <div class="balance">
           <div class="balance-left">
-            <div class="currency mt-2 p-3">R$</div>
+            <div class="currency mt-2 p-3">R$ </div>
           </div>
-          <div class="balance-right">
-            <div class="balance-amount p-3"><strong>************ </strong><i class="fa-solid fa-eye-slash p3"></i></div>
+          <div data-controller="balance-toggle">
+            <div class="balance-right hidden" data-target="balance-toggle.visible">
+              <div class="balance-amount p-3">
+                <strong><%= number_with_precision(@wallet_totals.sum, precision: 2)%></strong>
+                <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
+              </div>
+            </div>
+
+            <div class="balance-right" data-target="balance-toggle.hidden">
+              <div class="balance-amount p-3">
+                <strong>**********</strong>
+                <i class="fa-solid fa-eye-slash ps-3" data-action="click->balance-toggle#toggle"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -36,7 +48,9 @@
               </div>
               <div class="balance-right">
                 <div class="balance-title"><%= link_to wallet.name, wallet_path(wallet), class: "text-decoration-none" %></div>
-                <div class="balance-amount">500.000,00</div>
+                <div class="balance-amount"><% total_sum = wallet.operations.sum { |op| op.avg_buy_price * op.quantity } %>
+                  <%= number_with_precision(total_sum, precision: 2) %>
+                  </div>
               </div>
             </div>
             <div class="separator"></div>

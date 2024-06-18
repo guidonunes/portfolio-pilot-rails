@@ -3,6 +3,7 @@ class WalletsController < ApplicationController
 
   def index
     @wallets = policy_scope(Wallet)
+    @wallet_totals = calculate_wallet_totals(@wallets)
   end
 
   def show
@@ -14,6 +15,7 @@ class WalletsController < ApplicationController
     @worst_performer = performers[:worst]
     @total_holdings = @wallet.total_holdings_value
     @operation = Operation.find_by(id: params[:id])
+    @price_variations = @wallet.price_variations
   end
 
   def new
@@ -57,5 +59,11 @@ class WalletsController < ApplicationController
 
   def wallet_params
     params.require(:wallet).permit(:name)
+  end
+
+  def calculate_wallet_totals(wallets)
+    wallets.map do |wallet|
+      wallet.operations.sum { |op| op.avg_buy_price * op.quantity }
+    end
   end
 end

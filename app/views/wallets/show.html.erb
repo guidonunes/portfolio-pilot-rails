@@ -5,9 +5,7 @@
     <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
   </div>
 
-  <!-- Updated section to include the total value card and the allocation pie chart side by side -->
   <div class="d-flex justify-content-between">
-
     <!-- Total Value Card -->
     <div class="d-flex justify-content-center">
       <div class="card-total-balance">
@@ -22,20 +20,19 @@
               <div class="balance-amount pe-5 mt-5"><%= number_with_precision(@total_holdings, precision: 2) %></div>
             </div>
           </div>
-
-          <!--Display appreciation/depreciation-->
-            <div class="d-flex justify-content-end pe-5">
-              <% if @total_holdings > @wallet.total_holdings_value %>
-                <div class="appreciation emerald-green">
-                  <i class="fa-solid fa-caret-up"></i>
-                  <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
-                </div>
-              <% elsif @total_holdings < @wallet.total_holdings_value %>
-                <div class="appreciation ruby">
-                  <i class="fa-solid fa-caret-down"></i>
-                  <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+          <!-- Display appreciation/depreciation -->
+          <div class="d-flex justify-content-end pe-5">
+            <% if @total_holdings > @wallet.total_holdings_value %>
+              <div class="appreciation emerald-green">
+                <i class="fa-solid fa-caret-up"></i>
+                <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
               </div>
-              <% end %>
+            <% elsif @total_holdings < @wallet.total_holdings_value %>
+              <div class="appreciation ruby">
+                <i class="fa-solid fa-caret-down"></i>
+                <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -44,13 +41,11 @@
     <!-- Allocation Pie Chart -->
     <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
       <h2 class="card-title-spec p-3">Allocation</h2>
-      <%= pie_chart @wallet.operations.group(:avg_buy_price).count, donut: true, empty: "No data" %>
+      <%= render "layouts/doughnut" %>
     </div>
   </div>
 
-  <!-- New Section for Best and Worst Performers -->
   <div class="d-flex justify-content-between mb-4">
-
     <!-- Best Performer -->
     <div class="performer-card m-1" style="width: 49%;">
       <div class="card-body">
@@ -58,10 +53,10 @@
         <% if @best_performer %>
           <div class="d-flex justify-content-evenly">
             <p class="performer-card-text px-3 pb-3">
-               <%= @best_performer[:operation].holding.name %>
+              <%= @best_performer[:operation].holding.name %>
             </p>
             <p class="performer-card-text">
-              <span class="performer-color-up"><i class="fa-solid fa-caret-up"> </i><%= number_with_precision(@best_performer[:performance], precision: 2) %>%</span>
+              <span class="performer-color-up"><i class="fa-solid fa-caret-up"></i><%= number_with_precision(@best_performer[:performance], precision: 2) %>%</span>
             </p>
           </div>
         <% else %>
@@ -77,7 +72,7 @@
         <% if @worst_performer %>
           <div class="d-flex justify-content-evenly">
             <p class="performer-card-text px-3 pb-3">
-               <%= @worst_performer[:operation].holding.name %>
+              <%= @worst_performer[:operation].holding.name %>
             </p>
             <p class="performer-card-text">
               <span class="performer-color-down"><i class="fa-solid fa-caret-down"></i><%= number_with_precision(@worst_performer[:performance], precision: 2) %>%</span>
@@ -90,7 +85,6 @@
     </div>
   </div>
 
-  <!-- Wallet Assets Display -->
   <div class="wallet-card-container wallet-card">
     <div class="wallet">
       <div class="d-flex justify-content-between mb-5">
@@ -102,35 +96,35 @@
           <%= link_to "Edit Wallet Name", edit_wallet_path(@wallet), class: "btn btn-wallet", data: { bs_toggle: "modal", bs_target: "#nameOperationModal" }%>
         </div>
       </div>
+
+      <!-- Grid Operations -->
       <div class="grid-header text-center">
         <div class="column">Name</div>
         <div class="column">Price</div>
+        <div class="column">24h%</div>
         <div class="column">Avg. Buy Price</div>
-        <div class="column">Quantity</div>
         <div class="column">Holdings</div>
         <div class="column">Actions</div>
       </div>
 
       <% @wallet.operations.each do |operation| %>
         <div class="grid-operation text-center">
-          <div class="column ms-4"><%= operation.holding.name %></div>
-          <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
-          <div class="column">R$ <%=number_with_precision(operation.avg_buy_price, precision: 2) %></div>
-          <div class="column"><%= operation.quantity %></div>
-          <div class="column">R$ <%=number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %></div>
+          <div class="column ms-4 holdingname"><%= operation.holding.name %></div>
+          <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation), precision: 2) %></div>
+          <div class="column"><%= number_with_precision(find_percentage_holding_info(operation.holding.abreviation), precision: 2) %>%</div>
+          <div class="column">R$ <%= number_with_precision(operation.avg_buy_price, precision: 2) %></div>
+          <div class="column holdingamount">R$ <%= number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
 
+          <!-- Actions Dropdown -->
           <div class="column actions mb-3">
-            <%= link_to new_wallet_operation_path(@wallet), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } do %>
-              <i class="fa-solid fa-plus"></i>
-            <% end %>
-
-           <%= link_to edit_operation_path(operation), class: "btn btn-action btn-sm", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } do %>
-              <i class="fa fa-edit"></i>
-           <% end %>
-
-            <%= link_to operation_path(operation), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-action btn-sm" do %>
-              <i class="fa fa-trash"></i>
-            <% end %>
+            <div class="dropdown">
+              <i class="fa-solid fa-ellipsis pe-auto" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <%= link_to "Add", new_wallet_operation_path(@wallet), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } %>
+                <%= link_to "Edit", edit_operation_path(operation), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } %>
+                <%= link_to "Delete", operation_path(operation), method: :delete, class: "dropdown-item", data: { turbo_confirm: "Are you sure?" } %>
+              </ul>
+            </div>
           </div>
         </div>
       <% end %>

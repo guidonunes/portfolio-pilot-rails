@@ -52,6 +52,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "pundit"
 gem 'cryptocompare'
+gem 'httparty'
+gem 'json', '~> 2.6', '>= 2.6.3'
 
 gem "chartkick"
 
