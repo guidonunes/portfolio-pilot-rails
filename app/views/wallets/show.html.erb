@@ -110,7 +110,7 @@
       <% @wallet.operations.each do |operation| %>
         <div class="grid-operation text-center">
           <div class="column ms-4 holdingname"><%= operation.holding.name %></div>
-          <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation)["PRICE"], precision: 2) %></div>
+          <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abreviation), precision: 2) %></div>
           <div class="column"><%= number_with_precision(find_percentage_holding_info(operation.holding.abreviation), precision: 2) %>%</div>
           <div class="column">R$ <%= number_with_precision(operation.avg_buy_price, precision: 2) %></div>
           <div class="column holdingamount">R$ <%= number_with_precision(operation.avg_buy_price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
