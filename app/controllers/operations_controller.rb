@@ -48,6 +48,6 @@ class OperationsController < ApplicationController
   end
 
   def operation_params
-    params.require(:operation).permit(:holding_id, :quantity, :avg_buy_price)
+    params.require(:operation).permit(:holding_id, :quantity, :price)
   end
 end

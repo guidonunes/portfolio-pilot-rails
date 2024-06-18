@@ -63,7 +63,7 @@ class WalletsController < ApplicationController
 
   def calculate_wallet_totals(wallets)
     wallets.map do |wallet|
-      wallet.operations.sum { |op| op.avg_buy_price * op.quantity }
+      wallet.operations.sum { |op| op.price * op.quantity }
     end
   end
 end
