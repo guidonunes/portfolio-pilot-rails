@@ -17,4 +17,7 @@ Rails.application.routes.draw do
   end
   resources :operations, only: %i[edit update destroy]
   resources :holdings, only: %i[index show]
+  get "profile", to: "pages#profile"
+  get "nameform", to: "pages#edit_first_name"
+
 end
