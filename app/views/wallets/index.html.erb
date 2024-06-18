@@ -12,8 +12,20 @@
           <div class="balance-left">
             <div class="currency mt-2 p-3">R$</div>
           </div>
-          <div class="balance-right">
-            <div class="balance-amount p-3"><strong><%= number_with_precision(@wallet_totals.sum, precision: 2)%></strong><i class="fa-solid fa-eye-slash p3"></i></div>
+          <div data-controller="balance-toggle">
+            <div class="balance-right hidden" data-target="balance-toggle.visible">
+              <div class="balance-amount p-3">
+                <strong><%= number_with_precision(@wallet_totals.sum, precision: 2)%></strong>
+                <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
+              </div>
+            </div>
+
+            <div class="balance-right" data-target="balance-toggle.hidden">
+              <div class="balance-amount p-3">
+                <strong>**********</strong>
+                <i class="fa-solid fa-eye-slash ps-3" data-action="click->balance-toggle#toggle"></i>
+              </div>
+            </div>
           </div>
         </div>
       </div>
