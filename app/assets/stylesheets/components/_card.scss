@@ -227,3 +227,17 @@
 .text-quantity {
   font-size: 12px;
 }
+
+.hidden {
+  display: none;
+}
+
+.fa-eye {
+  cursor: pointer;
+  color: $gold;
+}
+
+.fa-eye-slash {
+  cursor: pointer;
+  color: $gold;
+}
