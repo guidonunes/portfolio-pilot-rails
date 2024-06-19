@@ -62,7 +62,7 @@ hr.solid {
 .card-total-balance {
   width: 720px;
   border-radius: 16px;
-  background-color: #ffffff;
+  background-color: $soft-white;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14), 0 10px 10px -4px rgba(0, 0, 0, 0.09);
   margin-bottom: 25px;
   float: left;
@@ -70,7 +70,7 @@ hr.solid {
 
   body {
     padding-top: 25px;
-    background-color: #f6f6f6;
+    background-color: $soft-white;
     font-family: $body-font;
     -webkit-font-smoothing: antialiased;
   }
@@ -91,20 +91,39 @@ hr.solid {
   }
 
   .currency {
-    font-family: $headers-font;
+    font-family: $body-font;
     font-size: 50px;
     font-weight: 300;
     line-height: 50px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   .balance-title {
     display: flex;
-    justify-content: left;
-    font-size: 18px;
+    justify-content: center;
+    font-size: 24px;
+    font-family: $headers-font;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+
+  }
+
+  .fa-eye-slash {
+    color: $midnight-blue;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   .balance-amount {
-    font-size: 44px;
+    font-size: 40px;
+    font-family: $body-font;
+    color:$midnight-blue;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    font-weight: 300;
+  }
+
+  .balance-amount-hide {
+    font-size: 40px;
+    color:$midnight-blue;
   }
 
   .separator {
@@ -157,7 +176,7 @@ hr.solid {
 }
 
 .card-my-wallets-preview {
-  border-radius: 16px;
+  border-radius: 8px;
   background-color: $soft-white;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14), 0 10px 10px -4px rgba(0, 0, 0, 0.09);
   position: relative;
@@ -172,7 +191,6 @@ hr.solid {
 
   .card-content {
     padding: 15px 20px 10px;
-    color: #4a4a4a;
   }
 
   .balance {
@@ -184,24 +202,44 @@ hr.solid {
     text-align: right;
   }
 
-  .currency {
+  .currency-w {
     font-size: 50px;
-    font-weight: 200;
+    font-family: $headers-font;
+    color: $midnight-blue;
+    font-weight: 300;
     line-height: 50px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
-  .balance-title {
-    font-size: 18px;
+  .balance-title-w {
+    font-size: 20px;
+    font-family: $headers-font;
+    color: $midnight-blue;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
-  .balance-amount {
-    font-size: 25px;
+  .balance-amount-w {
+    font-size: 24px;
+    font-family: $headers-font;
+    color: $gold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
   .separator {
     margin-top: 20px;
     margin-bottom: 6px;
     border-bottom: solid 1px rgba(151, 151, 151, 0.2);
+  }
+
+  .view-wallet {
+    color: $midnight-blue;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .fa-arrow-right-to-bracket{
+    font-size: 16px;
   }
 
   .actions {
@@ -217,11 +255,15 @@ hr.solid {
       transition: color 0.2s ease;
 
       &:hover {
-        color: $sky-blue;
+        color: $gold;
       }
     }
     .fa-trash-can {
-      color: $gold;
+      color: $midnight-blue;
+
+      &:hover {
+        color: $ruby;
+      }
     }
   }
   &:hover {

@@ -6,7 +6,7 @@
   <div class="d-flex justify-content-center">
     <div class="card-total-balance">
       <div class="card-content">
-        <div class="balance-title">Total Estimated Investment Value</div>
+        <h3 class="balance-title text-center">Total Estimated Investment Value</h3>
         <div class="separator"></div>
         <div class="balance">
           <div class="balance-left">
@@ -21,7 +21,7 @@
             </div>
 
             <div class="balance-right" data-target="balance-toggle.hidden">
-              <div class="balance-amount p-3">
+              <div class="balance-amount-hide p-3">
                 <strong>**********</strong>
                 <i class="fa-solid fa-eye-slash ps-3" data-action="click->balance-toggle#toggle"></i>
               </div>
@@ -44,26 +44,32 @@
           <div class="card-content">
             <div class="balance">
               <div class="balance-left">
-                <div class="currency">R$</div>
+                <div class="currency-w">R$</div>
               </div>
               <div class="balance-right">
-                <div class="balance-title"><%= link_to wallet.name, wallet_path(wallet), class: "text-decoration-none" %></div>
-                <div class="balance-amount"><% total_sum = wallet.operations.sum { |op| op.price * op.quantity } %>
+                <div><%= link_to wallet.name, wallet_path(wallet), class: "text-decoration-none balance-title-w" %></div>
+                <div class="balance-amount-w"><% total_sum = wallet.operations.sum { |op| op.price * op.quantity } %>
                   <%= number_with_precision(total_sum, precision: 2) %>
                   </div>
               </div>
             </div>
             <div class="separator"></div>
-            <div class="actions">
-              <div class="delete">
-                <%= link_to wallet_path(wallet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete do %>
-                  <i class="fa-solid fa-trash-can"></i>
-                <% end %>
-              </div>
-              <div class="view-wallet">
-                <i class="fa-solid fa-arrow-right-to-bracket" style="color: #000000;"></i>
-                <%= link_to "View Wallet", wallet_path(wallet), class: "text-decoration-none" %>
-              </div>
+
+              <div class="actions">
+
+
+                <div>
+                  <i class="fa-solid fa-arrow-right-to-bracket" style="color: #000000;"></i>
+                  <%= link_to "View Wallet", wallet_path(wallet), class: "text-decoration-none view-wallet" %>
+                </div>
+
+                <div class="delete">
+                  <%= link_to wallet_path(wallet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, method: :delete do %>
+                    <i class="fa-solid fa-trash-can"></i>
+                  <% end %>
+                </div>
+
+              <!--view-wallet-->
             </div>
           </div>
         </div>
