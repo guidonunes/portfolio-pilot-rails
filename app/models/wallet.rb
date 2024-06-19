@@ -6,14 +6,14 @@ class Wallet < ApplicationRecord
   has_many :holdings, through: :operations
 
   def total_holdings_value
-    operations.sum { |op| op.quantity * op.price }
+    operations.sum { |op| op.quantity * op.holding.current_price }
   end
 
   def best_and_worst_performers
     return { best: nil, worst: nil } if operations.empty?
 
     performances = operations.map do |operation|
-      current_price = operation.holding.current_price
+      current_price = operation.holding.update_current_price
       next if current_price.nil?
 
       performance = ((current_price - operation.price) / operation.price) * 100
