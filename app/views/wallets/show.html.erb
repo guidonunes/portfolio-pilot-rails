@@ -18,8 +18,19 @@
               <div class="balance-left">
                 <div class="currency mt-5 ps-5">R$</div>
               </div>
-              <div class="balance-right">
-                <div class="balance-amount pe-5 mt-5"><%= number_with_precision(@total_holdings, precision: 2) %></div>
+              <div data-controller="balance-toggle">
+                <div class="balance-right hidden" data-target="balance-toggle.visible">
+                  <div class="balance-amount pe-5 mt-5">
+                    <%= number_with_precision(@total_holdings, precision: 2) %>
+                    <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
+                  </div>
+                </div>
+                <div class="balance-right" data-target="balance-toggle.hidden">
+                  <div class="balance-amount p-3">
+                    <strong>**********</strong>
+                    <i class="fa-solid fa-eye-slash pe-5 mt-5" data-action="click->balance-toggle#toggle"></i>
+                  </div>
+                </div>
               </div>
             </div>
 
