@@ -13,7 +13,7 @@ class Wallet < ApplicationRecord
     return { best: nil, worst: nil } if operations.empty?
 
     performances = operations.map do |operation|
-      current_price = operation.holding.fetch_current_price
+      current_price = operation.holding.current_price
       next if current_price.nil?
 
       performance = ((current_price - operation.price) / operation.price) * 100
@@ -28,10 +28,10 @@ class Wallet < ApplicationRecord
     { best: best_performer, worst: worst_performer }
   end
 
-  def total_holdings_value
-    operations.sum do |operation|
-      current_price = operation.holding.fetch_current_price
-      current_price * operation.quantity
-    end
-  end
+  # def total_holdings_value
+  #   operations.sum do |operation|
+  #     current_price = operation.holding.fetch_current_price
+  #     current_price * operation.quantity
+  #   end
+  # end
 end

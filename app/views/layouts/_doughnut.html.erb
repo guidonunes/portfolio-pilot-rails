@@ -1,30 +1,5 @@
 <div>
-  <canvas id="allocationChart"></canvas>
+  <canvas data-doughnut-target="allocationChart" ></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-  document.addEventListener("turbo:load", function() {
-    const doughnutElement = document.getElementById('allocationChart');
-    if (!doughnutElement) return;
-
-    const holdingNames = Array.from(document.querySelectorAll('.holdingname'));
-    const holdingAmounts = Array.from(document.querySelectorAll('.holdingamount'));
-
-    const names = holdingNames.map(el => el.innerText);
-    const amounts = holdingAmounts.map(el => parseFloat(el.innerText.replace('R$', '').replace(',', '.')));
-
-    new Chart(doughnutElement, {
-      type: 'doughnut',
-      data: {
-        labels: names,
-        datasets: [{
-          label: 'Amount of holdings',
-          data: amounts,
-          borderWidth: 1
-        }]
-      }
-    });
-  });
-</script>
