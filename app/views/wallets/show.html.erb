@@ -110,11 +110,11 @@
       <% @wallet.operations.each do |operation| %>
         <div class="grid-operation text-center">
           <div class="column ms-4 holdingname"><%= operation.holding.name %></div>
-          <div class="column">R$ <%= number_with_precision(find_full_holding_info(operation.holding.abbreviation), precision: 2) %></div>
+          <div class="column">R$ <%= number_with_precision(operation.holding.fetch_current_price, precision: 2) %></div>
           <% if operation.holding.asset_type == 'fiat'  %>
             <div class="column"><%= number_with_precision(HgFinance.variation(operation.holding.abbreviation), precision: 2) %>%</div>
           <% else %>
-            <div class="column"><%= number_with_precision(find_percentage_holding_info(operation.holding.abbreviation), precision: 2) %>%</div>
+            <div class="column"><%= number_with_precision(operation.holding.find_percentage_holding_info, precision: 2) %>%</div>
           <% end %>
           <div class="column">R$ <%= number_with_precision(operation.price, precision: 2) %></div>
           <div class="column holdingamount">R$ <%= number_with_precision(operation.price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
@@ -126,8 +126,27 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <%= link_to "Add", new_wallet_operation_path(@wallet), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } %>
                 <%= link_to "Edit", edit_operation_path(operation), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } %>
-                <%= link_to "Delete", operation_path(operation), method: :delete, class: "dropdown-item", data: { turbo_confirm: "Are you sure?" } %>
+                <%= link_to "Delete", operation_path(operation), class: "dropdown-item", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bootstrap Modal - Edit Operation -->
+        <div class="modal fade" id="editOperationModal" tabindex="-1" aria-labelledby="editOperationModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title wobble-ver-left" id="editOperationModalLabel">Edit Operation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <% if operation %>
+                  <%= render "oedit", operation: %>
+                <% else %>
+                  <p>Operation not found.</p>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
@@ -153,24 +172,7 @@
   </div>
 </div>
 
-<!-- Bootstrap Modal - Edit Operation -->
-<div class="modal fade" id="editOperationModal" tabindex="-1" aria-labelledby="editOperationModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title wobble-ver-left" id="editOperationModalLabel">Edit Operation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <% if @operation %>
-          <%= render "oedit", operation: Operation.find(params[:id])%>
-        <% else %>
-          <p>Operation not found.</p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- Bootstrap Modal - Edit Wallet Name -->
 <div class="modal fade" id="nameOperationModal" tabindex="-1" aria-labelledby="nameOperationModalLabel" aria-hidden="true">

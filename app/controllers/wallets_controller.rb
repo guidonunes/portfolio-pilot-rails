@@ -7,15 +7,11 @@ class WalletsController < ApplicationController
   end
 
   def show
-    # Retrieve the wallet
     @wallet = Wallet.find(params[:id])
-    # Fetch best and worst performers
+    @total_holdings = @wallet.total_holdings_value
     performers = @wallet.best_and_worst_performers
     @best_performer = performers[:best]
     @worst_performer = performers[:worst]
-    @total_holdings = @wallet.total_holdings_value
-    @operation = Operation.find_by(id: params[:id])
-    @price_variations = @wallet.price_variations
   end
 
   def new

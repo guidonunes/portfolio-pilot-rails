@@ -9,14 +9,12 @@ class Wallet < ApplicationRecord
     return { best: nil, worst: nil } if operations.empty?
 
     performances = operations.map do |operation|
-      current_price = find_full_holding_info(operation.holding.abbreviation)
+      current_price = operation.holding.fetch_current_price
       next if current_price.nil?
 
       performance = ((current_price - operation.price) / operation.price) * 100
       { operation: operation, performance: performance }
-    end
-
-    performances.compact!
+    end.compact
 
     return { best: nil, worst: nil } unless performances.present?
 
@@ -28,18 +26,8 @@ class Wallet < ApplicationRecord
 
   def total_holdings_value
     operations.sum do |operation|
-      current_price = find_full_holding_info(operation.holding.abbreviation)
-      current_price ? current_price * operation.quantity : 0
-
-    end
-  end
-
-  def price_variations
-    operations.map do |operation|
-      {
-        holding: operation.holding,
-        price_variation: find_percentage_holding_info(operation.holding.abbreviation) || 0
-      }
+      current_price = operation.holding.fetch_current_price
+      current_price * operation.quantity
     end
   end
 end
