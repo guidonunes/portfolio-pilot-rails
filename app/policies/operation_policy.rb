@@ -17,6 +17,10 @@ class OperationPolicy < ApplicationPolicy
     record.wallet.user == user
   end
 
+  def render_oedit?
+    true
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve

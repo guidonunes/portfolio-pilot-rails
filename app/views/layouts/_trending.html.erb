@@ -5,7 +5,7 @@
       <h2>Cryptocurrencies</h2>
       <div class="card">
       <ul class="list-group">
-        <% @holdings.where(asset_type: "crypto").sample(5).each do |holding|%>
+        <% @holdings.where(asset_type: "crypto").last(5).each do |holding|%>
           <li class="info-grid p-2">
            <%= holding.name %>
             <span class="me-3">$ <%= number_with_precision(holding.current_price, precision: 2) %></span>
