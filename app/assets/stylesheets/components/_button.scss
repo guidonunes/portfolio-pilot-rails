@@ -2,13 +2,13 @@
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #5BC0EB; // Accent color
-  color: #FFFFFF;
+  color: $charcoal;
+  background-color: $gold;
   text-decoration: none;
   border-radius: 5px; // Adjust as needed
 
   &:hover {
-    background-color: darken(#5BC0EB, 10%);
+    background-color: darken($gold, 10%);
     color: $soft-white;
   }
 }
@@ -17,13 +17,13 @@
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
-  color: $charcoal;
-  background-color: $gold;
+  background-color: #5BC0EB; // Accent color
+  color: #FFFFFF;
   text-decoration: none;
   border-radius: 5px; // Adjust as needed
 
   &:hover {
-    background-color: darken($gold, 10%);
+    background-color: darken(#5BC0EB, 10%);
     color: $soft-white;
   }
 }
