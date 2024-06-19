@@ -1,8 +1,14 @@
 <%= simple_form_for [@wallet, operation] do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.association :holding, label: "Holding" %>
+  <div class="form-inputs" data-controller="search-bar">
+    <div class="position-relative">
+      <input type="text" class="position-absolute fake-input form-select select optional" data-action="input->search-bar#search focus->search-bar#showOptions" data-search-bar-target="input">
+      <%= f.association :holding, label: "Holding", input_html: {
+        "data-search-bar-target": "select"
+      } %>
+      <ul class="fake-options position-absolute d-none" data-search-bar-target="fakeOptions"></ul>
+    </div>
     <%= f.input :quantity, label: "Quantity" %>
     <%= f.input :price, label: "Price per Unit (R$)" %>
   </div>
@@ -12,3 +18,5 @@
     <%= link_to "Cancel", wallet_path(@wallet), class: "btn btn-ghost m-1" %>
   </div>
 <% end %>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
