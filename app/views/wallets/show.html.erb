@@ -1,162 +1,163 @@
 <h1 class="wallet-title text-center jello-horizontal"><%= @wallet.name %></h1>
+<div data-controller="render-oedit">
+  <div class="container" data-controller="doughnut">
+    <div class="d-flex justify-content-end">
+      <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
+    </div>
 
-<div class="container">
-  <div class="d-flex justify-content-end">
-    <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
-  </div>
+    <div class="d-flex justify-content-between">
+      <!-- Total Value Card -->
+      <div class="d-flex justify-content-center">
+        <div class="card-total-balance">
+          <div class="card-content">
+            <div class="balance-title">
+              <h2 class="card-title-spec p-5">Wallet Estimated Value</h2>
+            </div>
+            <div class="separator"></div>
+            <div class="balance">
+              <div class="balance-left">
+                <div class="currency mt-5 ps-5">R$</div>
+              </div>
+              <div class="balance-right">
+                <div class="balance-amount pe-5 mt-5"><%= number_with_precision(@total_holdings, precision: 2) %></div>
+              </div>
+            </div>
 
-  <div class="d-flex justify-content-between">
-    <!-- Total Value Card -->
-    <div class="d-flex justify-content-center">
-      <div class="card-total-balance">
-        <div class="card-content">
-          <div class="balance-title"><h2 class="card-title-spec p-5">Wallet Estimated Value</h2></div>
-          <div class="separator"></div>
-          <div class="balance">
-            <div class="balance-left">
-              <div class="currency mt-5 ps-5">R$</div>
+
+            <!-- Display appreciation/depreciation -->
+            <div class="d-flex justify-content-end pe-5">
+              <% if @total_holdings > @wallet.total_holdings_value %>
+                <div class="appreciation emerald-green">
+                  <i class="fa-solid fa-caret-up"></i>
+                  <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                </div>
+              <% elsif @total_holdings < @wallet.total_holdings_value %>
+                <div class="appreciation ruby">
+                  <i class="fa-solid fa-caret-down"></i>
+                  <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                </div>
+              <% end %>
             </div>
-            <div class="balance-right">
-              <div class="balance-amount pe-5 mt-5"><%= number_with_precision(@total_holdings, precision: 2) %></div>
-            </div>
-          </div>
-          <!-- Display appreciation/depreciation -->
-          <div class="d-flex justify-content-end pe-5">
-            <% if @total_holdings > @wallet.total_holdings_value %>
-              <div class="appreciation emerald-green">
-                <i class="fa-solid fa-caret-up"></i>
-                <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
-              </div>
-            <% elsif @total_holdings < @wallet.total_holdings_value %>
-              <div class="appreciation ruby">
-                <i class="fa-solid fa-caret-down"></i>
-                <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
-              </div>
-            <% end %>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Allocation Pie Chart -->
-    <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
-      <h2 class="card-title-spec p-3">Allocation</h2>
-      <%= render "layouts/doughnut" %>
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-between mb-4">
-    <!-- Best Performer -->
-    <div class="performer-card m-1" style="width: 49%;">
-      <div class="card-body">
-        <h5 class="card-title-spec text-center p-3 my-3">Best Performer</h5>
-        <% if @best_performer %>
-          <div class="d-flex justify-content-evenly">
-            <p class="performer-card-text px-3 pb-3">
-              <%= @best_performer[:operation].holding.name %>
-            </p>
-            <p class="performer-card-text">
-              <span class="performer-color-up"><i class="fa-solid fa-caret-up"></i><%= number_with_precision(@best_performer[:performance], precision: 2) %>%</span>
-            </p>
-          </div>
-        <% else %>
-          <p class="performer-card-text">No data available</p>
-        <% end %>
+      <!-- Allocation Pie Chart -->
+      <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
+        <h2 class="card-title-spec p-3">Allocation</h2>
+        <%= render "layouts/doughnut" %>
       </div>
     </div>
 
-    <!-- Worst Performer -->
-    <div class="performer-card m-1" style="width: 49%;">
-      <div class="card-body">
-        <h5 class="card-title-spec text-center p-3 my-3">Worst Performer</h5>
-        <% if @worst_performer %>
-          <div class="d-flex justify-content-evenly">
-            <p class="performer-card-text px-3 pb-3">
-              <%= @worst_performer[:operation].holding.name %>
-            </p>
-            <p class="performer-card-text">
-              <span class="performer-color-down"><i class="fa-solid fa-caret-down"></i><%= number_with_precision(@worst_performer[:performance], precision: 2) %>%</span>
-            </p>
-          </div>
-        <% else %>
-          <p class="performer-card-text">No data available</p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="wallet-card-container wallet-card">
-    <div class="wallet">
-      <div class="d-flex justify-content-between mb-5">
-        <h2 class="card-title-spec">Assets</h2>
-        <div>
-          <button type="button" class="btn btn-wallet" data-bs-toggle="modal" data-bs-target="#addOperationModal">
-            Add new operation
-          </button>
-          <%= link_to "Edit Wallet Name", edit_wallet_path(@wallet), class: "btn btn-wallet", data: { bs_toggle: "modal", bs_target: "#nameOperationModal" }%>
-        </div>
-      </div>
-
-      <!-- Grid Operations -->
-      <div class="grid-header text-center">
-        <div class="column">Name</div>
-        <div class="column">Price</div>
-        <div class="column">24h%</div>
-        <div class="column">Avg. Buy Price</div>
-        <div class="column">Holdings</div>
-        <div class="column">Actions</div>
-      </div>
-
-      <% @wallet.operations.each do |operation| %>
-        <div class="grid-operation text-center">
-          <div class="column ms-4 holdingname"><%= operation.holding.name %></div>
-          <div class="column">R$ <%= number_with_precision(operation.holding.fetch_current_price, precision: 2) %></div>
-          <% if operation.holding.asset_type == 'fiat'  %>
-            <div class="column"><%= number_with_precision(HgFinance.variation(operation.holding.abbreviation), precision: 2) %>%</div>
+    <div class="d-flex justify-content-between mb-4">
+      <!-- Best Performer -->
+      <div class="performer-card m-1" style="width: 49%;">
+        <div class="card-body">
+          <h5 class="card-title-spec text-center p-3 my-3">Best Performer</h5>
+          <% if @best_performer %>
+            <div class="d-flex justify-content-evenly">
+              <p class="performer-card-text px-3 pb-3">
+                <%= @best_performer[:operation].holding.name %>
+              </p>
+              <p class="performer-card-text">
+                <span class="performer-color-up"><i class="fa-solid fa-caret-up"></i><%= number_with_precision(@best_performer[:performance], precision: 2) %>%</span>
+              </p>
+            </div>
           <% else %>
-            <div class="column"><%= number_with_precision(operation.holding.find_percentage_holding_info, precision: 2) %>%</div>
+            <p class="performer-card-text">No data available</p>
           <% end %>
-          <div class="column">R$ <%= number_with_precision(operation.price, precision: 2) %></div>
-          <div class="column holdingamount">R$ <%= number_with_precision(operation.price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
+        </div>
+      </div>
 
-          <!-- Actions Dropdown -->
-          <div class="column actions mb-3">
-            <div class="dropdown">
-              <i class="fa-solid fa-ellipsis pe-auto" data-bs-toggle="dropdown" aria-expanded="false"></i>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <%= link_to "Add", new_wallet_operation_path(@wallet), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } %>
-                <%= link_to "Edit", edit_operation_path(operation), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } %>
-                <%= link_to "Delete", operation_path(operation), class: "dropdown-item", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-              </ul>
+      <!-- Worst Performer -->
+      <div class="performer-card m-1" style="width: 49%;">
+        <div class="card-body">
+          <h5 class="card-title-spec text-center p-3 my-3">Worst Performer</h5>
+          <% if @worst_performer %>
+            <div class="d-flex justify-content-evenly">
+              <p class="performer-card-text px-3 pb-3">
+                <%= @worst_performer[:operation].holding.name %>
+              </p>
+              <p class="performer-card-text">
+                <span class="performer-color-down"><i class="fa-solid fa-caret-down"></i><%= number_with_precision(@worst_performer[:performance], precision: 2) %>%</span>
+              </p>
             </div>
+          <% else %>
+            <p class="performer-card-text">No data available</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="wallet-card-container wallet-card">
+      <div class="wallet">
+        <div class="d-flex justify-content-between mb-5">
+          <h2 class="card-title-spec">Assets</h2>
+          <div>
+            <button type="button" class="btn btn-wallet" data-bs-toggle="modal" data-bs-target="#addOperationModal">
+              Add new operation
+            </button>
+            <%= link_to "Edit Wallet Name", edit_wallet_path(@wallet), class: "btn btn-wallet", data: { bs_toggle: "modal", bs_target: "#nameOperationModal" }%>
           </div>
         </div>
 
-        <!-- Bootstrap Modal - Edit Operation -->
-        <div class="modal fade" id="editOperationModal" tabindex="-1" aria-labelledby="editOperationModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title wobble-ver-left" id="editOperationModalLabel">Edit Operation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <% if operation %>
-                  <%= render "oedit", operation: %>
-                <% else %>
-                  <p>Operation not found.</p>
-                <% end %>
+        <!-- Grid Operations -->
+        <div class="grid-header text-center">
+          <div class="column">Name</div>
+          <div class="column">Price</div>
+          <div class="column">24h%</div>
+          <div class="column">Avg. Buy Price</div>
+          <div class="column">Holdings</div>
+          <div class="column">Actions</div>
+        </div>
+
+        <% @wallet.operations.each do |operation| %>
+          <div class="grid-operation text-center">
+            <div class="column ms-4" data-doughnut-target="holdingName"><%= operation.holding.name %></div>
+            <div class="column">R$ <%= number_with_precision(operation.holding.fetch_current_price, precision: 2) %></div>
+            <% if operation.holding.asset_type == 'fiat'  %>
+              <div class="column"><%= number_with_precision(HgFinance.variation(operation.holding.abbreviation), precision: 2) %>%</div>
+            <% else %>
+              <div class="column"><%= number_with_precision(operation.holding.find_percentage_holding_info, precision: 2) %>%</div>
+            <% end %>
+            <div class="column">R$ <%= number_with_precision(operation.price, precision: 2) %></div>
+            <div class="column" data-doughnut-target="holdingAmount">R$ <%= number_with_precision(operation.price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
+
+            <!-- Actions Dropdown -->
+            <div class="column actions mb-3">
+              <div class="dropdown">
+                <i class="fa-solid fa-ellipsis pe-auto" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <%= link_to "Add", new_wallet_operation_path(@wallet), class: "dropdown-item", data: { bs_toggle: "modal", bs_target: "#addOperationModal" } %>
+                  <%= link_to "Edit", render_oedit_path(operation), class: "dropdown-item", data: { action: "click->render-oedit#render" } %>
+                  <%= link_to "Edit", edit_operation_path(operation), class: "dropdown-item d-none", data: { bs_toggle: "modal", bs_target: "#editOperationModal" } %>
+                  <%= link_to "Delete", operation_path(operation), class: "dropdown-item", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+                </ul>
               </div>
             </div>
           </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOTSTRAP MODALS: -->
+
+  <!-- Bootstrap Modal - Edit Operation -->
+  <div class="modal fade" id="editOperationModal" tabindex="-1" aria-labelledby="editOperationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title wobble-ver-left" id="editOperationModalLabel">Edit Operation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      <% end %>
+        <div class="modal-body" data-render-oedit-target="modalBody">
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<!-- BOOTSTRAP MODALS: -->
-
 <!-- Bootstrap Modal - Add New Operation -->
 <div class="modal fade" id="addOperationModal" tabindex="-1" aria-labelledby="addOperationModalLabel" aria-hidden="true">
   <div class="modal-dialog">

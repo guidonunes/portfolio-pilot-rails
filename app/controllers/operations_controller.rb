@@ -1,6 +1,7 @@
 class OperationsController < ApplicationController
-  before_action :set_operation, only: [:edit, :update, :destroy]
+  before_action :set_operation, only: [:edit, :update, :destroy, :render_oedit]
   before_action :set_wallet, only: [:new, :create]
+  skip_forgery_protection only: [:render_oedit]
 
   def new
     @operation = Operation.new
@@ -39,6 +40,19 @@ class OperationsController < ApplicationController
   def destroy
     @operation.destroy!
     redirect_to wallet_path(@operation.wallet), notice: "You successfully deleted the transaction"
+  end
+
+  def render_oedit
+    respond_to do |format|
+      format.json {
+        render json: {
+          content: render_to_string(
+            partial: 'oedit',
+            formats: :html,
+            locals: { operation: @operation })
+        }
+      }
+    end
   end
 
   private
