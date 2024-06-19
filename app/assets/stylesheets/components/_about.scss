@@ -49,7 +49,6 @@
 
 .about-image {
   flex: 1;
-  margin-right: 40px;
   overflow: hidden;
 }
 
@@ -83,4 +82,9 @@
 .about-text {
   text-decoration: none;
   color: $gold;
+}
+
+.photo-portf {
+  width: 500px;
+  border-radius: 12px;
 }
