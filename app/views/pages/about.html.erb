@@ -1,22 +1,24 @@
-<div class="about-page-heading">
-  <h1>About us</h1>
-  <p>
-    Our team is composed by
-    <%= link_to "Camilly Aoki", "https://github.com/cyaf7", target: "_blank", class: "about-text"%>,
-    <%= link_to "Guilherme Nunes", "https://github.com/guidonunes", target: "_blank", class: "about-text"%>,
-    <%= link_to "Julian Vivas", "https://github.com/JulianRodeloV", target: "_blank", class: "about-text"%>,
-    <%= link_to "Kaio Ghiotti", " https://github.com/KaioRG5", target: "_blank", class: "about-text"%>.
-  </p>
-</div>
-<div class="container-about">
-  <section class="about">
-    <div class="about-image">
-      <%= image_tag "about.png"%>
-    </div>
-    <div class="about-content">
-      <h2>Our Goal</h2>
-      <p>As students from Le Wagon, we established this initiative with the aim of assisting individuals in organizing all their investments within a single application,
-      thereby saving time and promoting more orderly financial management.</p>
-    </div>
-  </section>
+<div class="container">
+  <div class="about-page-heading mt-5">
+    <h1>About us</h1>
+    <p class="mt-3">
+      Our team is composed by
+      <%= link_to "Camilly Aoki", "https://github.com/cyaf7", target: "_blank", class: "about-text"%>,
+      <%= link_to "Guilherme Nunes", "https://github.com/guidonunes", target: "_blank", class: "about-text"%>,
+      <%= link_to "Julian Vivas", "https://github.com/JulianRodeloV", target: "_blank", class: "about-text"%>,
+      <%= link_to "Kaio Ghiotti", " https://github.com/KaioRG5", target: "_blank", class: "about-text"%>.
+    </p>
+  </div>
+  <div class="container-about">
+    <section class="about my-5">
+      <div class="about-image mb-5">
+        <%= image_tag "aboutpic.jpeg", class:"photo-portf"%>
+      </div>
+      <div class="about-content">
+        <h2>Our Goal</h2>
+        <p>As students from Le Wagon, we established this initiative with the aim of assisting individuals in organizing all their investments within a single application,
+        thereby saving time and promoting more orderly financial management.</p>
+      </div>
+    </section>
+  </div>
 </div>
