@@ -5,6 +5,10 @@ class Wallet < ApplicationRecord
   has_many :operations, dependent: :destroy
   has_many :holdings, through: :operations
 
+  def total_holdings_value
+    operations.sum { |op| op.quantity * op.price }
+  end
+
   def best_and_worst_performers
     return { best: nil, worst: nil } if operations.empty?
 

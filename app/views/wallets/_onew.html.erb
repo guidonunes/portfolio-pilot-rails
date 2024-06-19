@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :holding %>
-    <%= f.input :quantity %>
-    <%= f.input :price, label: "Price" %>
+    <%= f.association :holding, label: "Holding" %>
+    <%= f.input :quantity, label: "Quantity" %>
+    <%= f.input :price, label: "Price per Unit (R$)" %>
   </div>
 
   <div class="form-actions d-flex justify-content-center">
