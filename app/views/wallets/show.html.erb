@@ -124,7 +124,7 @@
         <% @wallet.operations.each do |operation| %>
           <div class="grid-operation text-center">
             <div class="column ms-4" data-doughnut-target="holdingName"><%= operation.holding.name %></div>
-            <div class="column">R$ <%= number_with_precision(operation.holding.fetch_current_price, precision: 2) %></div>
+            <div class="column">R$ <%= number_with_precision(operation.holding.update_current_price, precision: 2) %></div>
             <% if operation.holding.asset_type == 'fiat'  %>
               <div class="column"><%= number_with_precision(HgFinance.variation(operation.holding.abbreviation), precision: 2) %>%</div>
             <% else %>

@@ -6,6 +6,7 @@ class Holding < ApplicationRecord
   def update_current_price
     self.current_price = fetch_current_price
     save!
+    current_price
   end
 
   def fetch_current_price
