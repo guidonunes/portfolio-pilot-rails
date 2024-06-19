@@ -54,6 +54,8 @@ gem "pundit"
 gem 'cryptocompare'
 gem 'httparty'
 gem 'json', '~> 2.6', '>= 2.6.3'
+gem 'sidekiq'
+
 
 gem "chartkick"
 
