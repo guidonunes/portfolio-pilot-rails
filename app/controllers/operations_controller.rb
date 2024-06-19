@@ -9,14 +9,19 @@ class OperationsController < ApplicationController
   end
 
   def create
-    @operation = Operation.new(operation_params)
-    @operation.wallet = @wallet
-    authorize @operation
-    if @operation.save
-      redirect_to wallet_path(@wallet)
+    @operation = @wallet.operations.find_by(holding_id: operation_params[:holding_id])
+    if @operation
+      authorize @operation
+      update_existing_operation(@operation, operation_params)
     else
-      render :new
-      @operation = Operation.new
+      @operation = Operation.new(operation_params)
+      @operation.wallet = @wallet
+      authorize @operation
+      if @operation.save
+        redirect_to wallet_path(@wallet)
+      else
+        render :new
+      end
     end
   end
 
@@ -33,7 +38,7 @@ class OperationsController < ApplicationController
 
   def destroy
     @operation.destroy!
-    redirect_to wallet_path(@operation.wallet), notice: "You succesfully deleted the transaction"
+    redirect_to wallet_path(@operation.wallet), notice: "You successfully deleted the transaction"
   end
 
   private
@@ -49,5 +54,14 @@ class OperationsController < ApplicationController
 
   def operation_params
     params.require(:operation).permit(:holding_id, :quantity, :price)
+  end
+
+  def update_existing_operation(operation, params)
+    new_quantity = operation.quantity + params[:quantity].to_f
+    new_total_investment = (operation.quantity * operation.price) + (params[:quantity].to_f * params[:price].to_f)
+    new_price = new_total_investment / new_quantity
+
+    operation.update(quantity: new_quantity, price: new_price)
+    redirect_to wallet_path(operation.wallet)
   end
 end
