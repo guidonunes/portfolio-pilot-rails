@@ -1,6 +1,12 @@
 <div class="about-page-heading">
   <h1>About us</h1>
-  <p>Our team is composed by Camilly Aoki, Guilherme Nunes, Kaio Ghiotti, Julian Vivas.</p>
+  <p>
+    Our team is composed by
+    <%= link_to "Camilly Aoki", "https://github.com/cyaf7", target: "_blank", class: "about-text"%>,
+    <%= link_to "Guilherme Nunes", "https://github.com/guidonunes", target: "_blank", class: "about-text"%>,
+    <%= link_to "Julian Vivas", "https://github.com/JulianRodeloV", target: "_blank", class: "about-text"%>,
+    <%= link_to "Kaio Ghiotti", " https://github.com/KaioRG5", target: "_blank", class: "about-text"%>.
+  </p>
 </div>
 <div class="container-about">
   <section class="about">
@@ -11,9 +17,6 @@
       <h2>Our Goal</h2>
       <p>As students from Le Wagon, we established this initiative with the aim of assisting individuals in organizing all their investments within a single application,
       thereby saving time and promoting more orderly financial management.</p>
-    </div>
-    <div class="home">
-      <%= link_to "Home", root_path, class:"btn btn-flat"%>
     </div>
   </section>
 </div>
