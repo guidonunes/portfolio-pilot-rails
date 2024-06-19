@@ -1,39 +1,15 @@
-<div class="container mt-5">
-  <div class="card profile-card">
-    <div class="card-body text-center">
-      <h2>Welcome, <%= @user.first_name %></h2>
+<div class="container mt-4">
+  <div class="update-info-card">
+    <h3 class="d-flex justify-content-center">User info</h3>
+    <hr class="solid">
+    <div class="d-flex justify-content-between">
+      <p>First Name: <strong><%= @user.first_name %></strong></p>
+      <p class="me-5">Last Name: <strong><%= @user.last_name %></strong></p>
     </div>
-  </div>
-
-  <div class="row mt-3">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-header">
-          <h3>Your information </h3>
-        </div>
-        <div class="card-body">
-          <p>Your first Name: <strong><%= @user.first_name %></strong> </p>
-          <p>Your last Name: <strong><%= @user.last_name %></strong> </p>
-          <p>Your Email is: <strong><%= @user.email %></strong> </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="card">
-        <div class="card-header">
-            <h3>Account Details </h3>
-        </div>
-        <div class="card-body">
-          <p><strong>Creation Date:</strong> <%= @user.created_at %></p>
-          <p><strong>Last Update:</strong> <%= @user.updated_at %></p>
-        </div>
-        </div>
-    </div>
-  </div>
-
-  <div class="mt-4"><p><strong>There is any info you want to change?</strong> Please <strong>click</strong> bellow!</p></div>
-
-  <div class="my-3">
-    <%= link_to "Change your user information", edit_user_registration_path, class: "btn btn-primary" %>
+    <p>Email: <strong><%= @user.email %></strong> </p>
+    <hr class="solid">
+    <p><strong>Creation Date:</strong> <%= @user.created_at.strftime('%I:%M %p, %A, %B %d %Y') %></p>
+    <p><strong>Last Update:</strong> <%= @user.updated_at.strftime('%I:%M %p, %A, %B %d %Y') %></p>
+    <%= link_to "Update your information", edit_user_registration_path, class: "btn-flat" %>
   </div>
 </div>
