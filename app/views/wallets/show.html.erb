@@ -2,7 +2,7 @@
 <div data-controller="render-oedit">
   <div class="container" data-controller="doughnut">
     <div class="d-flex justify-content-end">
-      <%= link_to "Back to wallets", wallets_path, class: "btn btn-flat m-2 mb-5" %>
+      <%= link_to "Back to wallets", wallets_path, class: "btn btn-ghost m-2 mb-5" %>
     </div>
 
     <div class="d-flex justify-content-between">
@@ -54,7 +54,7 @@
 
       <!-- Allocation Pie Chart -->
       <div class="card-holdings-quantity mb-4 ms-3" style="width: 50%;">
-        <h2 class="card-title-spec p-3">Allocation</h2>
+        <h2 class="card-title-spec text-center p-3">Allocation</h2>
         <%= render "layouts/doughnut" %>
       </div>
     </div>
