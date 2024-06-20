@@ -9,6 +9,7 @@ class WalletsController < ApplicationController
   def show
     @wallet = Wallet.find(params[:id])
     @total_holdings = @wallet.total_holdings_value
+    @all_time_profit = @wallet.all_time_profit
     performers = @wallet.best_and_worst_performers
     @best_performer = performers[:best]
     @worst_performer = performers[:worst]

@@ -6,47 +6,95 @@
     </div>
 
     <div class="d-flex justify-content-between">
-      <!-- Total Value Card -->
-      <div class="d-flex justify-content-center">
-        <div class="card-total-balance">
-          <div class="card-content">
-            <div class="balance-title">
-              <h2 class="card-title-spec p-5">Wallet Estimated Value</h2>
-            </div>
-            <div class="separator"></div>
-            <div class="balance">
-              <div class="balance-left">
-                <div class="currency mt-5 ps-5">R$</div>
+      <div class="d-flex flex-column" style="width: 50%;">
+        <!-- Total Value Card -->
+        <div class="d-flex justify-content-center">
+          <div class="card-total-balance">
+            <div class="card-content pb-5">
+              <div class="balance-title">
+                <h2 class="card-title-spec p-5">Wallet Estimated Value</h2>
               </div>
-              <div data-controller="balance-toggle">
-                <div class="balance-right hidden" data-target="balance-toggle.visible">
-                  <div class="balance-amount pe-5 mt-5">
-                    <%= number_with_precision(@total_holdings, precision: 2) %>
-                    <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
+              <div class="separator"></div>
+              <div class="balance">
+                <div class="balance-left">
+                  <div class="currency mt-5 ps-5">R$</div>
+                </div>
+                <div data-controller="balance-toggle">
+                  <div class="balance-right hidden" data-target="balance-toggle.visible">
+                    <div class="balance-amount pe-5 mt-5">
+                      <%= number_with_precision(@total_holdings, precision: 2) %>
+                      <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
+                    </div>
+                  </div>
+                  <div class="balance-right" data-target="balance-toggle.hidden">
+                    <div class="balance-amount p-3">
+                      <strong>**********</strong>
+                      <i class="fa-solid fa-eye-slash pe-5 mt-5" data-action="click->balance-toggle#toggle"></i>
+                    </div>
                   </div>
                 </div>
-                <div class="balance-right" data-target="balance-toggle.hidden">
-                  <div class="balance-amount p-3">
-                    <strong>**********</strong>
-                    <i class="fa-solid fa-eye-slash pe-5 mt-5" data-action="click->balance-toggle#toggle"></i>
-                  </div>
-                </div>
               </div>
-            </div>
 
-            <!-- Display appreciation/depreciation -->
-            <div class="d-flex justify-content-end pe-5">
-              <% if @total_holdings > @wallet.total_holdings_value %>
-                <div class="appreciation emerald-green">
-                  <i class="fa-solid fa-caret-up"></i>
-                  <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
+              <!-- Display appreciation/depreciation -->
+              <div class="d-flex justify-content-end pe-5">
+                <% if @total_holdings > @wallet.total_holdings_value %>
+                  <div class="appreciation emerald-green">
+                    <i class="fa-solid fa-caret-up"></i>
+                    <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                  </div>
+                <% elsif @total_holdings < @wallet.total_holdings_value %>
+                  <div class="appreciation ruby">
+                    <i class="fa-solid fa-caret-down"></i>
+                    <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- All-Time Profit Card -->
+        <div class="d-flex justify-content-center">
+          <div class="card-total-balance">
+            <div class="card-content pb-5">
+              <div class="balance-title">
+                <h2 class="card-title-spec p-5">All-Time Profit/Loss</h2>
+              </div>
+              <div class="separator"></div>
+              <div class="balance">
+                <div class="balance-left">
+                  <div class="currency mt-5 ps-5">R$</div>
                 </div>
-              <% elsif @total_holdings < @wallet.total_holdings_value %>
-                <div class="appreciation ruby">
-                  <i class="fa-solid fa-caret-down"></i>
-                  <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                <div data-controller="balance-toggle">
+                  <div class="balance-right hidden" data-target="balance-toggle.visible">
+                    <div class="balance-amount pe-5 mt-5">
+                      <%= number_with_precision(@all_time_profit, precision: 2) %>
+                      <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
+                    </div>
+                  </div>
+                  <div class="balance-right" data-target="balance-toggle.hidden">
+                    <div class="balance-amount p-3">
+                      <strong>**********</strong>
+                      <i class="fa-solid fa-eye-slash pe-5 mt-5" data-action="click->balance-toggle#toggle"></i>
+                    </div>
+                  </div>
                 </div>
-              <% end %>
+              </div>
+
+              <!-- Display profit or loss -->
+              <div class="d-flex justify-content-end pe-5">
+                <% if @all_time_profit > 0 %>
+                  <div class="appreciation">
+                    <i class="fa-solid fa-caret-up"></i>
+                    <%= number_with_precision(@all_time_profit, precision: 2, class:"at-balance-amount-up") %>
+                  </div>
+                <% elsif @all_time_profit < 0 %>
+                  <div class="appreciation">
+                    <i class="fa-solid fa-caret-down"></i>
+                    <%= number_with_precision(@all_time_profit, precision: 2) %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
@@ -146,7 +194,6 @@
               </div>
             </div>
           </div>
-
         <% end %>
       </div>
     </div>
@@ -182,8 +229,6 @@
     </div>
   </div>
 </div>
-
-
 
 <!-- Bootstrap Modal - Edit Wallet Name -->
 <div class="modal fade" id="nameOperationModal" tabindex="-1" aria-labelledby="nameOperationModalLabel" aria-hidden="true">
