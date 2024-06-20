@@ -1,5 +1,5 @@
 class OperationsController < ApplicationController
-  before_action :set_operation, only: [:edit, :update, :destroy, :render_oedit]
+  before_action :set_operation, only: [:new, :edit, :update, :destroy, :render_oedit]
   before_action :set_wallet, only: [:new, :create]
   skip_forgery_protection only: [:render_oedit]
 
@@ -21,7 +21,8 @@ class OperationsController < ApplicationController
       if @operation.save
         redirect_to wallet_path(@wallet)
       else
-        render :new
+        flash[:alert] = "Ouch! Invalid Asset Name"
+        redirect_to new_wallet_operation_path(@wallet)
       end
     end
   end

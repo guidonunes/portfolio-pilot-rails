@@ -84,7 +84,7 @@
                 </div>
               </div>
 
-              <!-- Display profit or loss -->
+              <!-- Display profit or loss in percent -->
               <div class="d-flex justify-content-end pe-5">
                 <% if @all_time_profit > 0 %>
                   <div class="appreciation">
@@ -238,6 +238,10 @@
     </div>
   </div>
 </div>
+
+  <% flash.each do |key, message| %>
+    <div class="flash <%= key %>"><%= message %></div>
+  <% end %>
 
 <!-- Bootstrap Modal - Edit Wallet Name -->
 <div class="modal fade" id="nameOperationModal" tabindex="-1" aria-labelledby="nameOperationModalLabel" aria-hidden="true">
