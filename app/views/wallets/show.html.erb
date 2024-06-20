@@ -175,7 +175,7 @@
         <% @wallet.operations.each do |operation| %>
           <div class="grid-operation text-center">
             <div class="column ms-4" data-doughnut-target="holdingName"><%= operation.holding.name %></div>
-            <div class="column">R$ <%= number_with_precision(operation.holding.update_current_price, precision: 2) %></div>
+            <div class="column" data-doughnut-target="holdingAmount">R$ <%= number_with_precision(operation.holding.update_current_price, precision: 2) %></div>
             <% if operation.holding.asset_type == 'fiat'  %>
               <% percentage_change = HgFinance.variation(operation.holding.abbreviation) %>
               <span class="<%= percentage_change < 0 ? 'performer-color-down' : 'performer-color-up' %>">
@@ -188,7 +188,7 @@
               </span>
             <% end %>
             <div class="column">R$ <%= number_with_precision(operation.price, precision: 2) %></div>
-            <div class="column" data-doughnut-target="holdingAmount">R$ <%= number_with_precision(operation.price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
+            <div class="column">R$ <%= number_with_precision(operation.price * operation.quantity, precision: 2) %><br><span data-doughnut-target="holdingQuantity" class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
 
             <!-- Actions Dropdown -->
             <div class="column actions mb-3">
