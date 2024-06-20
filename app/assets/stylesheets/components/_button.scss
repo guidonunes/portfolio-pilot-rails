@@ -33,14 +33,15 @@
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: $midnight-blue; // Accent color
-  color: #FFFFFF;
+  background-color: none; // Accent color
+  border: 1px solid $midnight-blue;
+  color: $midnight-blue;
   text-decoration: none;
   border-radius: 5px; // Adjust as needed
 
   &:hover {
-    background-color: darken($sky-blue, 10%);
-    color: $soft-white;
+    color: $ruby;
+    border: 1px solid $ruby;
   }
 }
 
