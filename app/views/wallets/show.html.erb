@@ -39,13 +39,11 @@
               <div class="d-flex justify-content-end pe-5">
                 <% if @total_holdings > @wallet.total_holdings_value %>
                   <div class="appreciation emerald-green">
-                    <i class="fa-solid fa-caret-up"></i>
-                    <%= number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                    <%#number_with_precision((@total_holdings - @wallet.total_holdings_value) / @wallet.total_holdings_value * 100, precision: 2) %>
                   </div>
                 <% elsif @total_holdings < @wallet.total_holdings_value %>
                   <div class="appreciation ruby">
-                    <i class="fa-solid fa-caret-down"></i>
-                    <%= number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>%
+                    <%# number_with_precision((@wallet.total_holdings_value - @total_holdings) / @wallet.total_holdings_value * 100, precision: 2) %>
                   </div>
                 <% end %>
               </div>
@@ -89,12 +87,12 @@
                 <% if @all_time_profit > 0 %>
                   <div class="appreciation">
                     <i class="fa-solid fa-caret-up"></i>
-                    <%= number_with_precision(@all_time_profit, precision: 2, class:"at-balance-amount-up") %>
+                    <%= number_with_precision(@percentage_change_total_holdings, precision: 2, class:"at-balance-amount-up") %>%
                   </div>
                 <% elsif @all_time_profit < 0 %>
                   <div class="appreciation">
                     <i class="fa-solid fa-caret-down"></i>
-                    <%= number_with_precision(@all_time_profit, precision: 2) %>
+                    <%= number_with_precision(@percentage_change_total_holdings, precision: 2) %>%%
                   </div>
                 <% end %>
               </div>
