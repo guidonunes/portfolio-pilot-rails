@@ -9,6 +9,12 @@ class Wallet < ApplicationRecord
     operations.sum { |op| op.quantity * op.holding.current_price }
   end
 
+  def all_time_profit
+    total_invested = operations.sum { |op| op.quantity * op.price }
+    total_value = total_holdings_value
+    total_value - total_invested
+  end
+
   def best_and_worst_performers
     return { best: nil, worst: nil } if operations.empty?
 
