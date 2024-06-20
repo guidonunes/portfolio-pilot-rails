@@ -75,12 +75,12 @@
 .fake-option {
   list-style: none;
   padding: 0.5rem;
-  border-bottom: solid 2px black;
+  border-bottom: solid 1px rgb(182, 182, 182);
   cursor: pointer;
 }
 
 .fake-option:hover {
-  background-color: #b1b1b1;
+  background-color: white;
   transition: all;
   transition-duration: 0.5s;
 }
@@ -88,7 +88,7 @@
 .fake-options {
   margin-top: -1rem;
   padding-left: 0;
-  background-color: white;
+  background-color: $soft-white;
   width: 100%;
   z-index: 10;
 }
