@@ -68,7 +68,10 @@
                 <div data-controller="balance-toggle">
                   <div class="balance-right hidden" data-target="balance-toggle.visible">
                     <div class="balance-amount pe-5 mt-5">
-                      <%= number_with_precision(@all_time_profit, precision: 2) %>
+                      <% percentage_change = @all_time_profit%>
+                      <span class="<%= percentage_change < 0 ? 'performer-color-down' : 'performer-color-up' %>">
+                        <%= number_with_precision(@all_time_profit, precision: 2) %>
+                      </span>
                       <i class="fa-solid fa-eye ps-3" data-action="click->balance-toggle#toggle"></i>
                     </div>
                   </div>
@@ -174,9 +177,15 @@
             <div class="column ms-4" data-doughnut-target="holdingName"><%= operation.holding.name %></div>
             <div class="column">R$ <%= number_with_precision(operation.holding.update_current_price, precision: 2) %></div>
             <% if operation.holding.asset_type == 'fiat'  %>
-              <div class="column"><%= number_with_precision(HgFinance.variation(operation.holding.abbreviation), precision: 2) %>%</div>
+              <% percentage_change = HgFinance.variation(operation.holding.abbreviation) %>
+              <span class="<%= percentage_change < 0 ? 'performer-color-down' : 'performer-color-up' %>">
+                <div class="column"><%= number_with_precision(percentage_change, precision: 2) %>%</div>
+              </span>
             <% else %>
-              <div class="column"><%= number_with_precision(operation.holding.find_percentage_holding_info, precision: 2) %>%</div>
+              <% percentage_change = operation.holding.find_percentage_holding_info %>
+              <span class="<%= percentage_change < 0 ? 'performer-color-down' : 'performer-color-up' %>">
+                <div class="column"><%= number_with_precision(percentage_change, precision: 2) %>%</div>
+              </span>
             <% end %>
             <div class="column">R$ <%= number_with_precision(operation.price, precision: 2) %></div>
             <div class="column" data-doughnut-target="holdingAmount">R$ <%= number_with_precision(operation.price * operation.quantity, precision: 2) %><br><span class="text-quantity">Qtd.:<%= operation.quantity %></span></div>
