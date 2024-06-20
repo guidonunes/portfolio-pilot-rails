@@ -11,6 +11,7 @@ class WalletsController < ApplicationController
     @total_holdings = @wallet.total_holdings_value
     @all_time_profit = @wallet.all_time_profit
     performers = @wallet.best_and_worst_performers
+    @percentage_change_total_holdings = @wallet.percentage_change_total_holdings
     @best_performer = performers[:best]
     @worst_performer = performers[:worst]
   end

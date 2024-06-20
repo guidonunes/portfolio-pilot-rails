@@ -15,6 +15,16 @@ class Wallet < ApplicationRecord
     total_value - total_invested
   end
 
+  def total_invested
+    operations.sum { |op| op.quantity * op.price }
+  end
+
+  def percentage_change_total_holdings
+    return 0 if total_invested.zero?
+
+    ((total_holdings_value - total_invested) / total_invested.to_f) * 100
+  end
+
   def best_and_worst_performers
     return { best: nil, worst: nil } if operations.empty?
 
