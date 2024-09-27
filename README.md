@@ -16,7 +16,6 @@ PortfolioPilot is a desktop portfolio tracker designed to help users monitor bot
 * Ruby on Rails: Provides the backend framework for managing user data, cryptocurrency, and stock market integrations.
 * Stimulus.js: Adds dynamic front-end interactivity and responsiveness.
 * Chart.js: Used for data visualization, displaying cryptocurrency and stock performance with various charts.
-* Web3: For integrating cryptocurrency and blockchain-related metrics.
 
 ## Setup
 
